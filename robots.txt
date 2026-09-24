@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.f2fconstruccionesyreformas.com/sitemap.xml
