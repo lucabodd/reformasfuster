@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+{{ page.generated_note }}
+<html lang="{{ page.lang }}" data-root="{{ page.root }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ meta.title | attr }}</title>
+  <meta name="description" content="{{ meta.description | attr }}">
+  <link rel="canonical" href="{{ page.url }}">
+{{ page.alternates }}
+  <meta name="theme-color" content="#f5f0e8">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="{{ page.og_locale }}">
+{{ page.og_locale_alternates }}
+  <meta property="og:site_name" content="Construcciones y Reformas F2F">
+  <meta property="og:title" content="{{ meta.og_title | attr }}">
+  <meta property="og:description" content="{{ meta.og_description | attr }}">
+  <meta property="og:url" content="{{ page.url }}">
+  <meta property="og:image" content="{{ page.og_image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="{{ page.root }}favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ page.root }}assets/img/apple-touch-icon.png">
+  <link rel="preload" href="{{ page.root }}assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ page.root }}assets/css/styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="{{ page.root }}assets/js/main.js" defer></script>
+  <script type="application/json" id="i18n">{{ page.js_strings }}</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GeneralContractor",
+    "name": "Construcciones y Reformas F2F",
+    "alternateName": "construccionesf2f",
+    "description": {{ meta.jsonld_description | json }},
+    "url": "https://www.f2fconstruccionesyreformas.com/",
+    "image": "{{ page.og_image }}",
+    "logo": "https://www.f2fconstruccionesyreformas.com/assets/img/apple-touch-icon.png",
+    "email": "construccionesf2f@gmail.com",
+    "telephone": "+34 620 218 734",
+    "contactPoint": [
+      { "@type": "ContactPoint", "telephone": "+34 620 218 734", "contactType": "customer service", "availableLanguage": ["es", "ca"] },
+      { "@type": "ContactPoint", "telephone": "+34 609 648 785", "contactType": "customer service", "availableLanguage": ["es", "ca"] }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "C/ Matilde Malo, 4",
+      "postalCode": "46792",
+      "addressLocality": "La Barraca d'Aigües Vives, Alzira",
+      "addressRegion": "Valencia",
+      "addressCountry": "ES"
+    },
+    "areaServed": ["Alzira", "Carcaixent", "Canals", "Provincia de Valencia"],
+    "knowsAbout": ["Obra nueva", "Reformas integrales", "Reformas parciales", "Rehabilitación de fachadas", "Ascensores a cota cero", "Eliminación de barreras arquitectónicas", "Interiorismo", "Gestión de licencias de obra", "Albañilería"]
+  }
+  </script>
+</head>
+<body>
+  <!-- Iconos y patrones compartidos -->
+  {{> icons.svg }}
+
+  <a class="skip-link" href="#main">{{ ui.skip }}</a>
+
+  <header class="site-header" data-header>
+    <div class="container header__inner">
+      <a class="brand" href="#inicio" aria-label="{{ ui.brand_home | attr }}">
+        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#b64a26"/>
+          <path d="M9 19.5 20 11l11 8.5M12.5 17v12h15V17" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M9.5 33h21M9.5 31v4M30.5 31v4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
+        </svg>
+        <span class="brand__text">
+          <span class="brand__name">F2F</span>
+          <span class="brand__tag">Construcciones y Reformas</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="menu" aria-label="{{ ui.nav_label | attr }}">
+        <ul class="nav__list">
+          <li><a href="#servicios">{{ nav.servicios }}</a></li>
+          <li><a href="#metodo">{{ nav.metodo }}</a></li>
+          <li><a href="#perfil">{{ nav.perfil }}</a></li>
+          <li><a href="#proyectos">{{ nav.proyectos }}</a></li>
+          <li><a href="#contacto">{{ nav.contacto }}</a></li>
+        </ul>
+        <div class="nav__mobile-extra">
+          <a class="btn btn--primary btn--block" href="#contacto">{{ ui.cta_menu }}</a>
+          <p class="nav__phones">
+            <a href="tel:+34620218734"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>620&nbsp;218&nbsp;734</a>
+            <a href="tel:+34609648785"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>609&nbsp;648&nbsp;785</a>
+          </p>
+          <div class="nav__langs">
+            <p class="nav__langs-title" id="menu-lang-title">{{ ui.lang_label }}</p>
+            <ul class="lang-pills" aria-labelledby="menu-lang-title">
+{{ page.lang_links_full }}
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header__actions">
+        <a class="header__phone" href="tel:+34620218734">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+          <span>620&nbsp;218&nbsp;734</span>
+        </a>
+        <nav class="lang-switch" aria-label="{{ ui.lang_label | attr }}">
+          <ul>
+{{ page.lang_links_short }}
+          </ul>
+        </nav>
+        <a class="btn btn--primary btn--sm header__cta" href="#contacto">{{ ui.cta_header }}</a>
+        <button class="nav-toggle" type="button" aria-controls="menu" aria-expanded="false" data-nav-toggle>
+          <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="visually-hidden">{{ js.menu_open }}</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============================== INICIO -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow" data-reveal>{{ hero.eyebrow }}</p>
+          <h1 class="hero__title" id="hero-title" data-reveal>{{ hero.title }}</h1>
+          <p class="hero__lead" data-reveal>{{ hero.lead }}</p>
+          <div class="hero__cta" data-reveal>
+            <a class="btn btn--primary btn--lg" href="#contacto">
+              {{ hero.cta }}
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="https://wa.me/34620218734?text={{ wa.text | url }}" target="_blank" rel="noopener">
+              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              620&nbsp;218&nbsp;734
+            </a>
+          </div>
+        </div>
+
+        <figure class="hero__art" data-reveal>
+          <div class="compare is-drawing" data-compare style="--pos: 50%">
+            <div class="compare__layer compare__layer--plan">
+              {{> hero-plan.svg }}
+            </div>
+            <div class="compare__layer compare__layer--render">
+              {{> hero-render.svg }}
+            </div>
+            <span class="compare__tag compare__tag--plan" aria-hidden="true">{{ hero.plan_tag }}</span>
+            <span class="compare__tag compare__tag--render" aria-hidden="true">{{ hero.render_tag }}</span>
+            <div class="compare__handle" role="slider" tabindex="0" aria-label="{{ hero.compare_label | attr }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="{{ hero.compare_value | attr }}" data-compare-handle>
+              <span class="compare__knob"><svg class="icon" aria-hidden="true"><use href="#i-drag"/></svg></span>
+            </div>
+          </div>
+          <figcaption class="hero__caption">
+            <span class="hero__caption-hint"><svg class="icon" aria-hidden="true"><use href="#i-drag"/></svg>{{ hero.hint }}</span>
+            {{ hero.caption }}
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="container">
+        <ul class="facts" data-reveal>
+          <li class="fact">
+            <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+            <p><strong>{{ facts.f1_title }}</strong> {{ facts.f1_text }}</p>
+          </li>
+          <li class="fact">
+            <svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg>
+            <p><strong>{{ facts.f2_title }}</strong> {{ facts.f2_text }}</p>
+          </li>
+          <li class="fact">
+            <svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg>
+            <p><strong>{{ facts.f3_title }}</strong> {{ facts.f3_text }}</p>
+          </li>
+          <li class="fact">
+            <svg class="icon" aria-hidden="true"><use href="#i-helmet"/></svg>
+            <p><strong>{{ facts.f4_title }}</strong> {{ facts.f4_text }}</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>{{ ticker.t1 }}</span><span>{{ ticker.t2 }}</span><span>{{ ticker.t3 }}</span><span>{{ ticker.t4 }}</span><span>{{ ticker.t5 }}</span><span>{{ ticker.t6 }}</span><span>{{ ticker.t7 }}</span><span>{{ ticker.t8 }}</span><span>{{ ticker.t9 }}</span>
+        <span>{{ ticker.t1 }}</span><span>{{ ticker.t2 }}</span><span>{{ ticker.t3 }}</span><span>{{ ticker.t4 }}</span><span>{{ ticker.t5 }}</span><span>{{ ticker.t6 }}</span><span>{{ ticker.t7 }}</span><span>{{ ticker.t8 }}</span><span>{{ ticker.t9 }}</span>
+      </div>
+    </div>
+
+    <!-- ============================== SERVICIOS -->
+    <section class="section services" id="servicios" aria-labelledby="servicios-title">
+      <div class="container">
+        <header class="section-head section-head--split">
+          <div>
+            <p class="eyebrow" data-reveal>{{ servicios.eyebrow }}</p>
+            <h2 id="servicios-title" data-reveal>{{ servicios.title }}</h2>
+          </div>
+          <p class="section-head__lead" data-reveal>{{ servicios.lead }}</p>
+        </header>
+
+        <ul class="services__grid">
+          <li class="service" data-reveal>
+            <span class="service__num">01</span>
+            <span class="service__icon"><svg class="icon" aria-hidden="true"><use href="#i-crane"/></svg></span>
+            <h3>{{ servicios.s1_title }}</h3>
+            <p>{{ servicios.s1_text }}</p>
+          </li>
+          <li class="service" data-reveal>
+            <span class="service__num">02</span>
+            <span class="service__icon"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg></span>
+            <h3>{{ servicios.s2_title }}</h3>
+            <p>{{ servicios.s2_text }}</p>
+          </li>
+          <li class="service" data-reveal>
+            <span class="service__num">03</span>
+            <span class="service__icon"><svg class="icon" aria-hidden="true"><use href="#i-roller"/></svg></span>
+            <h3>{{ servicios.s3_title }}</h3>
+            <p>{{ servicios.s3_text }}</p>
+          </li>
+          <li class="service" data-reveal>
+            <span class="service__num">04</span>
+            <span class="service__icon"><svg class="icon" aria-hidden="true"><use href="#i-facade"/></svg></span>
+            <h3>{{ servicios.s4_title }}</h3>
+            <p>{{ servicios.s4_text }}</p>
+          </li>
+          <li class="service" data-reveal>
+            <span class="service__num">05</span>
+            <span class="service__icon"><svg class="icon" aria-hidden="true"><use href="#i-elevator"/></svg></span>
+            <h3>{{ servicios.s5_title }}</h3>
+            <p>{{ servicios.s5_text }}</p>
+          </li>
+          <li class="service" data-reveal>
+            <span class="service__num">06</span>
+            <span class="service__icon"><svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg></span>
+            <h3>{{ servicios.s6_title }}</h3>
+            <p>{{ servicios.s6_text }}</p>
+          </li>
+          <li class="service" data-reveal>
+            <span class="service__num">07</span>
+            <span class="service__icon"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg></span>
+            <h3>{{ servicios.s7_title }}</h3>
+            <p>{{ servicios.s7_text }}</p>
+          </li>
+          <li class="service" data-reveal>
+            <span class="service__num">08</span>
+            <span class="service__icon"><svg class="icon" aria-hidden="true"><use href="#i-bricks"/></svg></span>
+            <h3>{{ servicios.s8_title }}</h3>
+            <p>{{ servicios.s8_text }}</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================== CÓMO TRABAJAMOS -->
+    <section class="section process" id="metodo" aria-labelledby="metodo-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>{{ metodo.eyebrow }}</p>
+          <h2 id="metodo-title" data-reveal>{{ metodo.title }}</h2>
+        </header>
+
+        <ol class="steps">
+          <li class="step" data-reveal>
+            <span class="step__num">01</span>
+            <h3>{{ metodo.p1_title }}</h3>
+            <p>{{ metodo.p1_text }}</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num">02</span>
+            <h3>{{ metodo.p2_title }}</h3>
+            <p>{{ metodo.p2_text }}</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num">03</span>
+            <h3>{{ metodo.p3_title }}</h3>
+            <p>{{ metodo.p3_text }}</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num">04</span>
+            <h3>{{ metodo.p4_title }}</h3>
+            <p>{{ metodo.p4_text }}</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num">05</span>
+            <h3>{{ metodo.p5_title }}</h3>
+            <p>{{ metodo.p5_text }}</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================== PERFIL -->
+    <section class="section profile" id="perfil" aria-labelledby="perfil-title">
+      <div class="container profile__grid">
+        <div class="profile__intro">
+          <p class="eyebrow eyebrow--light" data-reveal>{{ perfil.eyebrow }}</p>
+          <h2 class="profile__title" id="perfil-title" data-reveal>{{ perfil.title }}</h2>
+          <div class="profile__years" data-reveal>
+            <span class="profile__years-num" aria-hidden="true">30<span>+</span></span>
+            <p><span class="visually-hidden">{{ perfil.years_hidden }}</span> {{ perfil.years_text }}</p>
+          </div>
+        </div>
+
+        <div class="profile__body">
+          <p class="profile__lead" data-reveal>{{ perfil.lead }}</p>
+          <p data-reveal>{{ perfil.text }}</p>
+
+          <ul class="team">
+            <li class="team__item" data-reveal>
+              <svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg>
+              <h3>{{ perfil.team1_title }}</h3>
+              <p>{{ perfil.team1_text }}</p>
+            </li>
+            <li class="team__item" data-reveal>
+              <svg class="icon" aria-hidden="true"><use href="#i-helmet"/></svg>
+              <h3>{{ perfil.team2_title }}</h3>
+              <p>{{ perfil.team2_text }}</p>
+            </li>
+            <li class="team__item" data-reveal>
+              <svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>
+              <h3>{{ perfil.team3_title }}</h3>
+              <p>{{ perfil.team3_text }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PROYECTOS -->
+    <section class="section projects" id="proyectos" aria-labelledby="proyectos-title">
+      <div class="container">
+        <header class="section-head section-head--split">
+          <div>
+            <p class="eyebrow" data-reveal>{{ proyectos.eyebrow }}</p>
+            <h2 id="proyectos-title" data-reveal>{{ proyectos.title }}</h2>
+          </div>
+          <p class="section-head__lead" data-reveal>{{ proyectos.lead }}</p>
+        </header>
+
+        <!--
+          FOTOS DE LOS PROYECTOS
+          Sube las fotos a assets/img/proyectos/ y escribe sus rutas en data-gallery, separadas por comas
+          (rutas desde la raíz de la web, sin "../"). La primera será la portada. Ejemplo:
+          data-gallery="assets/img/proyectos/fachada-alzira-1.jpg, assets/img/proyectos/fachada-alzira-2.jpg"
+          Mientras no haya fotos se muestra el dibujo técnico. Después: python3 tools/build.py
+        -->
+        <div class="projects__grid">
+          <article class="project project--wide" data-reveal data-gallery="">
+            <div class="project__media">
+              {{> drawing-fachada.svg }}
+            </div>
+            <div class="project__body">
+              <div class="project__text">
+                <p class="project__meta"><span class="tag">{{ proyectos.tag_rehab }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Alzira</span></p>
+                <h3>{{ proyectos.p1_title }}</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="project" data-reveal data-gallery="">
+            <div class="project__media">
+              {{> drawing-parcial.svg }}
+            </div>
+            <div class="project__body">
+              <div class="project__text">
+                <p class="project__meta"><span class="tag">{{ proyectos.tag_reforma }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Carcaixent</span></p>
+                <h3>{{ proyectos.p2_title }}</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="project" data-reveal data-gallery="">
+            <div class="project__media">
+              {{> drawing-integral.svg }}
+            </div>
+            <div class="project__body">
+              <div class="project__text">
+                <p class="project__meta"><span class="tag">{{ proyectos.tag_reforma }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Carcaixent</span></p>
+                <h3>{{ proyectos.p3_title }}</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="project project--wide" data-reveal data-gallery="">
+            <div class="project__media">
+              {{> drawing-ascensor.svg }}
+            </div>
+            <div class="project__body">
+              <div class="project__text">
+                <p class="project__meta"><span class="tag">{{ proyectos.tag_access }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Canals</span></p>
+                <h3>{{ proyectos.p4_title }}</h3>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CTA -->
+    <section class="cta-band" aria-labelledby="cta-title">
+      <div class="container cta-band__inner">
+        <div>
+          <h2 id="cta-title" data-reveal>{{ cta.title }}</h2>
+          <p data-reveal>{{ cta.text }}</p>
+        </div>
+        <div class="cta-band__actions" data-reveal>
+          <a class="btn btn--light btn--lg" href="tel:+34620218734">
+            <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+            {{ cta.call }}
+          </a>
+          <a class="btn btn--outline-light btn--lg" href="https://wa.me/34620218734?text={{ wa.text | url }}" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            {{ cta.whatsapp }}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CONTACTO -->
+    <section class="section contact" id="contacto" aria-labelledby="contacto-title">
+      <div class="container contact__grid">
+        <div class="contact__info">
+          <p class="eyebrow" data-reveal>{{ contacto.eyebrow }}</p>
+          <h2 id="contacto-title" data-reveal>{{ contacto.title }}</h2>
+          <p class="contact__lead" data-reveal>{{ contacto.lead }}</p>
+
+          <ul class="contact-list" data-reveal>
+            <li>
+              <span class="contact-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+              <div>
+                <span class="contact-list__label">{{ contacto.phone_label }}</span>
+                <span class="contact-list__value"><a href="tel:+34620218734">620&nbsp;218&nbsp;734</a> <span class="sep">·</span> <a href="tel:+34609648785">609&nbsp;648&nbsp;785</a></span>
+              </div>
+            </li>
+            <li>
+              <span class="contact-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
+              <div>
+                <span class="contact-list__label">{{ contacto.email_label }}</span>
+                <span class="contact-list__value"><a href="mailto:construccionesf2f@gmail.com">construccionesf2f@gmail.com</a></span>
+              </div>
+            </li>
+            <li>
+              <span class="contact-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
+              <div>
+                <span class="contact-list__label">{{ contacto.address_label }}</span>
+                <address class="contact-list__value">C/ Matilde Malo, 4<br>{{ contacto.address_line2 }}</address>
+                <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query=C%2F%20Matilde%20Malo%204%2C%2046792%20La%20Barraca%20d%27Aig%C3%BCes%20Vives%2C%20Alzira%2C%20Valencia" target="_blank" rel="noopener">{{ contacto.directions }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-ne"/></svg></a>
+              </div>
+            </li>
+            <li>
+              <span class="contact-list__icon"><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg></span>
+              <div>
+                <span class="contact-list__label">{{ contacto.zone_label }}</span>
+                <span class="contact-list__value">{{ contacto.zone_value }}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <form class="contact-form" data-contact-form novalidate data-reveal>
+          <h3 class="contact-form__title">{{ contacto.form_title }}</h3>
+          <p class="contact-form__intro">{{ contacto.form_intro }}</p>
+
+          <div class="field">
+            <label for="f-nombre">{{ contacto.name }} <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-telefono">{{ contacto.phone }} <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required>
+            </div>
+            <div class="field">
+              <label for="f-localidad">{{ contacto.town }}</label>
+              <input id="f-localidad" name="localidad" type="text" autocomplete="address-level2">
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend>{{ contacto.type }}</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="tipo" value="{{ contacto.chip1 | attr }}"><span>{{ contacto.chip1 }}</span></label>
+              <label class="chip"><input type="radio" name="tipo" value="{{ contacto.chip2 | attr }}"><span>{{ contacto.chip2 }}</span></label>
+              <label class="chip"><input type="radio" name="tipo" value="{{ contacto.chip3 | attr }}"><span>{{ contacto.chip3 }}</span></label>
+              <label class="chip"><input type="radio" name="tipo" value="{{ contacto.chip4 | attr }}"><span>{{ contacto.chip4 }}</span></label>
+              <label class="chip"><input type="radio" name="tipo" value="{{ contacto.chip5 | attr }}"><span>{{ contacto.chip5 }}</span></label>
+              <label class="chip"><input type="radio" name="tipo" value="{{ contacto.chip6 | attr }}"><span>{{ contacto.chip6 }}</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="f-mensaje">{{ contacto.message }} <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="f-mensaje" name="mensaje" rows="4" required placeholder="{{ contacto.placeholder | attr }}"></textarea>
+          </div>
+
+          <p class="form-error" role="alert" data-form-error hidden></p>
+
+          <div class="form-actions">
+            <button class="btn btn--whatsapp" type="submit" value="whatsapp">
+              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              {{ contacto.send_whatsapp }}
+            </button>
+            <button class="btn btn--ghost" type="submit" value="email">
+              <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+              {{ contacto.send_email }}
+            </button>
+          </div>
+          <p class="form-note">{{ contacto.note }}</p>
+          <p class="form-success" role="status" data-form-success hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a class="brand brand--light" href="#inicio" aria-label="{{ ui.brand_home | attr }}">
+          <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#b64a26"/>
+            <path d="M9 19.5 20 11l11 8.5M12.5 17v12h15V17" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M9.5 33h21M9.5 31v4M30.5 31v4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
+          </svg>
+          <span class="brand__text">
+            <span class="brand__name">F2F</span>
+            <span class="brand__tag">Construcciones y Reformas</span>
+          </span>
+        </a>
+        <p>{{ footer.about }}</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="{{ ui.footer_nav_label | attr }}">
+        <h2 class="footer__title">{{ footer.nav_title }}</h2>
+        <ul>
+          <li><a href="#servicios">{{ nav.servicios }}</a></li>
+          <li><a href="#metodo">{{ nav.metodo }}</a></li>
+          <li><a href="#perfil">{{ nav.perfil }}</a></li>
+          <li><a href="#proyectos">{{ nav.proyectos }}</a></li>
+          <li><a href="#contacto">{{ nav.contacto }}</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__contact">
+        <h2 class="footer__title">{{ footer.contact_title }}</h2>
+        <ul>
+          <li><a href="tel:+34620218734">620&nbsp;218&nbsp;734</a> · <a href="tel:+34609648785">609&nbsp;648&nbsp;785</a></li>
+          <li><a href="mailto:construccionesf2f@gmail.com">construccionesf2f@gmail.com</a></li>
+          <li>{{ footer.address }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span data-year>2026</span> Construcciones y Reformas F2F</p>
+      <div class="footer__lang">
+        <span class="footer__lang-title" id="footer-lang-title">{{ ui.lang_label }}</span>
+        <ul aria-labelledby="footer-lang-title">
+{{ page.lang_links_full }}
+        </ul>
+      </div>
+      <a class="footer__top" href="#inicio">{{ footer.top }} <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/34620218734?text={{ wa.text | url }}" target="_blank" rel="noopener" aria-label="{{ wa.float_label | attr }}" data-wa-float>
+    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+  </a>
+</body>
+</html>

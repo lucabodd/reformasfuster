@@ -1,15 +1,15 @@
 """Ilustración isométrica del hero de index.html: capa «plano» (líneas y cotas) y capa «3D» (render a color).
 
-Uso:  python3 tools/hero.py
-Regenera las dos capas y las inserta en index.html entre los marcadores
-<!-- hero:plan --> ... <!-- /hero:plan --> y <!-- hero:render --> ... <!-- /hero:render -->.
+Uso:  python3 tools/hero.py && python3 tools/build.py
+Regenera las dos capas en src/partials/hero-plan.svg y src/partials/hero-render.svg;
+después tools/build.py las inserta en las páginas de los tres idiomas.
+Los títulos accesibles de las ilustraciones son claves de src/i18n.toml (hero.plan_alt, hero.render_alt).
 
 Proyección isométrica: x hacia abajo-derecha, y hacia abajo-izquierda, z hacia arriba (unidades en metros).
 Los estilos de la capa del plano (.w-*) están en assets/css/styles.css.
 """
 import math
 import pathlib
-import re
 
 S = 23.0  # px por metro
 C30 = math.cos(math.radians(30))
@@ -499,23 +499,15 @@ def build():
     wire = wire_layer()
     vb = f'0 0 {W} {H}'
     svg_wire = (f'<svg class="compare__svg" viewBox="{vb}" role="img" aria-labelledby="plano-title">'
-                f'<title id="plano-title">Plano isométrico de una vivienda con cotas</title>{wire}</svg>')
+                f'<title id="plano-title">{{{{ hero.plan_alt }}}}</title>{wire}</svg>')
     svg_render = (f'<svg class="compare__svg" viewBox="{vb}" role="img" aria-labelledby="render-title">'
-                  f'<title id="render-title">Visualización 3D de la misma vivienda terminada</title>{render}</svg>')
+                  f'<title id="render-title">{{{{ hero.render_alt }}}}</title>{render}</svg>')
     return svg_wire, svg_render
 
 
-def inject(index_path):
-    wire, render = build()
-    html = index_path.read_text(encoding="utf-8")
-    for name, svg in (("plan", wire), ("render", render)):
-        pat = re.compile(rf"(<!-- hero:{name} -->)(.*?)(<!-- /hero:{name} -->)", re.S)
-        if not pat.search(html):
-            raise SystemExit(f"No encuentro el marcador hero:{name} en {index_path}")
-        html = pat.sub(lambda m: f"{m.group(1)}\n{svg}\n{m.group(3)}", html)
-    index_path.write_text(html, encoding="utf-8")
-    print(f"Ilustración actualizada en {index_path}")
-
-
 if __name__ == "__main__":
-    inject(pathlib.Path(__file__).resolve().parent.parent / "index.html")
+    partials = pathlib.Path(__file__).resolve().parent.parent / "src" / "partials"
+    wire, render = build()
+    (partials / "hero-plan.svg").write_text(wire + "\n", encoding="utf-8")
+    (partials / "hero-render.svg").write_text(render + "\n", encoding="utf-8")
+    print(f"Ilustración actualizada en {partials}. Ahora ejecuta: python3 tools/build.py")

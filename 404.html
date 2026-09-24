@@ -30,12 +30,37 @@
 <body>
   <main>
     <p class="code" aria-hidden="true">404</p>
-    <h1>Esta página <em>no existe.</em></h1>
-    <p>Puede que la dirección haya cambiado con la nueva web. Desde la página principal encontrarás nuestros servicios, proyectos y datos de contacto.</p>
+    <h1 data-t="h1">Esta página <em>no existe.</em></h1>
+    <p data-t="text">Puede que la dirección haya cambiado con la nueva web. Desde la página principal encontrarás nuestros servicios, proyectos y datos de contacto.</p>
     <div class="actions">
-      <a class="primary" href="/">Ir a la página principal</a>
-      <a href="tel:+34620218734">Llamar al 620&nbsp;218&nbsp;734</a>
+      <a class="primary" href="/" data-t="home">Ir a la página principal</a>
+      <a href="tel:+34620218734" data-t="call">Llamar al 620&nbsp;218&nbsp;734</a>
     </div>
   </main>
+  <script>
+    // Misma página para los tres idiomas: se elige según la ruta (/va/… o /en/…)
+    (function () {
+      var match = location.pathname.match(/^\/(va|en)(\/|$)/);
+      if (!match) return;
+      var T = {
+        va: {
+          lang: 'ca-valencia', root: '/va/', title: 'Pàgina no trobada · Construcciones y Reformas F2F',
+          h1: 'Esta pàgina <em>no existeix.</em>',
+          text: "Potser l'adreça ha canviat amb la nova web. Des de la pàgina principal trobaràs els nostres serveis, projectes i dades de contacte.",
+          home: "Torna a l'inici", call: 'Telefona al 620&nbsp;218&nbsp;734'
+        },
+        en: {
+          lang: 'en', root: '/en/', title: 'Page not found · Construcciones y Reformas F2F',
+          h1: "This page <em>doesn't exist.</em>",
+          text: 'The address may have changed with our new website. From the home page you can find our services, projects and contact details.',
+          home: 'Go to the home page', call: 'Call 620&nbsp;218&nbsp;734'
+        }
+      }[match[1]];
+      document.documentElement.lang = T.lang;
+      document.title = T.title;
+      document.querySelectorAll('[data-t]').forEach(function (el) { el.innerHTML = T[el.getAttribute('data-t')]; });
+      document.querySelector('[data-t="home"]').setAttribute('href', T.root);
+    })();
+  </script>
 </body>
 </html>

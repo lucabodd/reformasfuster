@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.f2fconstruccionesyreformas.com/</loc>
-    <lastmod>2026-09-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.f2fconstruccionesyreformas.com/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://www.f2fconstruccionesyreformas.com/va/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.f2fconstruccionesyreformas.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.f2fconstruccionesyreformas.com/"/>
+  </url>
+  <url>
+    <loc>https://www.f2fconstruccionesyreformas.com/va/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.f2fconstruccionesyreformas.com/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://www.f2fconstruccionesyreformas.com/va/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.f2fconstruccionesyreformas.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.f2fconstruccionesyreformas.com/"/>
+  </url>
+  <url>
+    <loc>https://www.f2fconstruccionesyreformas.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.f2fconstruccionesyreformas.com/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://www.f2fconstruccionesyreformas.com/va/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.f2fconstruccionesyreformas.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.f2fconstruccionesyreformas.com/"/>
   </url>
 </urlset>

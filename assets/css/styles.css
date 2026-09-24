@@ -282,6 +282,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .nav__list a {
   display: block;
   padding: .5rem .8rem;
+  white-space: nowrap;
   border-radius: 999px;
   font-size: .96rem;
   font-weight: 540;
@@ -293,7 +294,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .nav__mobile-extra { display: none; }
 
 .header__actions { display: flex; align-items: center; gap: .9rem; }
-.header__phone { display: inline-flex; align-items: center; gap: .45rem; font-weight: 620; font-size: .98rem; font-variant-numeric: tabular-nums; text-decoration: none; }
+.header__phone { display: inline-flex; align-items: center; gap: .45rem; font-weight: 620; font-size: .98rem; font-variant-numeric: tabular-nums; white-space: nowrap; text-decoration: none; }
+.header__cta { white-space: nowrap; }
 .header__phone .icon { color: var(--accent); }
 .header__phone:hover span { text-decoration: underline; }
 
@@ -325,11 +327,47 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .nav-open .nav-toggle__bars span:nth-child(2) { opacity: 0; }
 .nav-open .nav-toggle__bars span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
-@media (max-width: 1180px) {
+/* selector de idioma: ES | VA | EN */
+.lang-switch ul { display: flex; padding: 3px; border: 1px solid var(--line-strong); border-radius: 999px; }
+.lang-switch a {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  height: 30px;
+  padding: 0 .5rem;
+  border-radius: 999px;
+  font-size: .74rem;
+  font-weight: 680;
+  letter-spacing: .08em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: background-color .2s, color .2s;
+}
+.lang-switch a:hover { color: var(--ink); background: rgba(29, 27, 24, .06); }
+.lang-switch a[aria-current] { background: var(--ink); color: var(--paper); }
+
+.nav__langs { display: grid; gap: .65rem; }
+.nav__langs-title { margin: 0; font-size: .74rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.lang-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+.lang-pills a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: .5rem 1.1rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.lang-pills a:hover { border-color: var(--ink); }
+.lang-pills a[aria-current] { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+
+@media (max-width: 1339px) {
   .header__phone { display: none; }
 }
 
-@media (max-width: 920px) {
+@media (max-width: 1199px) {
   .nav {
     position: fixed;
     inset: var(--header-h) 0 0;
@@ -362,6 +400,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .nav__phones .icon { color: var(--accent); }
   .header__cta { display: none; }
   .nav-toggle { display: inline-grid; }
+  .header__actions .lang-switch { display: none; }
+}
+
+/* tabletas: menú plegado, pero el botón de presupuesto y el idioma siguen a la vista */
+@media (min-width: 760px) and (max-width: 1199px) {
+  .header__cta { display: inline-flex; }
+  .header__actions .lang-switch { display: block; }
+  .nav__langs { display: none; }
 }
 
 /* ---------------------------------------------------------------- hero */
@@ -944,6 +990,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .site-footer a:hover { color: var(--on-dark); text-decoration: underline; }
 .footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-block: 1.5rem 2rem; border-top: 1px solid var(--line-dark); font-size: .88rem; }
 .footer__bottom p { margin: 0; }
+.footer__lang { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1rem; }
+.footer__lang-title { font-size: .72rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; color: var(--on-dark); }
+.footer__lang ul { display: flex; flex-wrap: wrap; gap: .4rem 1rem; }
+.footer__lang a[aria-current] { color: var(--on-dark); text-decoration: underline; text-underline-offset: .3em; }
 .footer__top { display: inline-flex; align-items: center; gap: .4rem; }
 
 @media (min-width: 820px) {

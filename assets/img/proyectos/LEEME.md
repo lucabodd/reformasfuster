@@ -2,11 +2,17 @@
 
 Sube aquí las fotos de las obras (JPG, unos 1600–2000 px de ancho, máximo ~400 KB cada una).
 
-Después, en `index.html`, escribe sus rutas en el atributo `data-gallery` del proyecto correspondiente, separadas por comas. La primera será la portada:
+Después, en **`src/index.html`** (la plantilla, no el `index.html` de la raíz), escribe sus rutas en el atributo `data-gallery` del proyecto correspondiente, separadas por comas. La primera será la portada. Las rutas empiezan en la raíz de la web y sirven para los tres idiomas:
 
 ```html
 <article class="project project--wide" data-reveal
          data-gallery="assets/img/proyectos/fachada-alzira-1.jpg, assets/img/proyectos/fachada-alzira-2.jpg">
+```
+
+Y regenera las páginas:
+
+```bash
+python3 tools/build.py
 ```
 
 Nombres sugeridos:

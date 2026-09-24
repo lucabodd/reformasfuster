@@ -1,0 +1,633 @@
+# Textos de la web en los tres idiomas: es = castellano · va = valencià · en = English
+#
+# - Cada texto lleva sus tres versiones juntas (clave.es / clave.va / clave.en).
+# - Se puede usar HTML: <em> (palabras en cursiva del titular), <strong>, &nbsp; (espacio que no se parte).
+# - No uses comillas dobles dentro de los textos: usa « » o “ ”.
+# - Las claves de [js] son mensajes que muestra el JavaScript; {name}, {p}, {total}… se sustituyen solos.
+#
+# Después de editar, regenera las páginas:  python3 tools/build.py
+
+[meta]
+title.es = "Construcciones y Reformas F2F · Alzira (Valencia) | Obra nueva y reformas integrales"
+title.va = "Construcciones y Reformas F2F · Alzira (València) | Obra nova i reformes integrals"
+title.en = "Construcciones y Reformas F2F · Alzira (Valencia) | New builds and renovations"
+
+description.es = "Empresa de construcción y reformas en Alzira (Valencia) con más de 30 años de experiencia. Arquitecto propio, gestión de licencias, visualización 3D y gremios propios. Presupuesto sin compromiso."
+description.va = "Empresa de construcció i reformes a Alzira (València) amb més de 30 anys d'experiència. Arquitecte propi, gestió de llicències, visualització 3D i gremis propis. Pressupost sense compromís."
+description.en = "Construction and renovation company in Alzira (Valencia) with over 30 years of experience. In-house architect, planning permits, 3D visualisation and our own trades. No-obligation quotes."
+
+og_title.es = "Construcciones y Reformas F2F · Alzira (Valencia)"
+og_title.va = "Construcciones y Reformas F2F · Alzira (València)"
+og_title.en = "Construcciones y Reformas F2F · Alzira (Valencia)"
+
+og_description.es = "Obra nueva y reformas de principio a fin, con arquitecto propio y visualización previa en 3D. Más de 30 años de experiencia. Presupuesto sin compromiso."
+og_description.va = "Obra nova i reformes de principi a fi, amb arquitecte propi i visualització prèvia en 3D. Més de 30 anys d'experiència. Pressupost sense compromís."
+og_description.en = "New builds and renovations from start to finish, with an in-house architect and a 3D preview. Over 30 years of experience. No-obligation quotes."
+
+jsonld_description.es = "Empresa de construcción y reformas en Alzira (Valencia) con más de 30 años de experiencia: obra nueva, reformas integrales y parciales, rehabilitación de fachadas y ascensores a cota cero, con arquitecto propio y visualización previa en 3D."
+jsonld_description.va = "Empresa de construcció i reformes a Alzira (València) amb més de 30 anys d'experiència: obra nova, reformes integrals i parcials, rehabilitació de façanes i ascensors a cota zero, amb arquitecte propi i visualització prèvia en 3D."
+jsonld_description.en = "Construction and renovation company in Alzira (Valencia) with over 30 years of experience: new builds, full and partial renovations, façade restoration and step-free lifts, with an in-house architect and 3D visualisation."
+
+[ui]
+skip.es = "Saltar al contenido"
+skip.va = "Salta al contingut"
+skip.en = "Skip to content"
+
+brand_home.es = "F2F Construcciones y Reformas, ir al inicio"
+brand_home.va = "F2F Construcciones y Reformas, anar a l'inici"
+brand_home.en = "F2F Construcciones y Reformas, go to the home page"
+
+nav_label.es = "Principal"
+nav_label.va = "Principal"
+nav_label.en = "Main"
+
+footer_nav_label.es = "Pie de página"
+footer_nav_label.va = "Peu de pàgina"
+footer_nav_label.en = "Footer"
+
+lang_label.es = "Idioma"
+lang_label.va = "Idioma"
+lang_label.en = "Language"
+
+cta_header.es = "Pide presupuesto"
+cta_header.va = "Demana pressupost"
+cta_header.en = "Get a quote"
+
+cta_menu.es = "Pide presupuesto sin compromiso"
+cta_menu.va = "Demana pressupost sense compromís"
+cta_menu.en = "Request a no-obligation quote"
+
+[nav]
+servicios.es = "Servicios"
+servicios.va = "Serveis"
+servicios.en = "Services"
+
+metodo.es = "Cómo trabajamos"
+metodo.va = "Com treballem"
+metodo.en = "How we work"
+
+perfil.es = "Perfil"
+perfil.va = "Perfil"
+perfil.en = "About us"
+
+proyectos.es = "Proyectos"
+proyectos.va = "Projectes"
+proyectos.en = "Projects"
+
+contacto.es = "Contacto"
+contacto.va = "Contacte"
+contacto.en = "Contact"
+
+[hero]
+eyebrow.es = "Construcción y reformas&nbsp;· Alzira&nbsp;/&nbsp;Valencia"
+eyebrow.va = "Construcció i reformes&nbsp;· Alzira&nbsp;/&nbsp;València"
+eyebrow.en = "Construction &amp; renovation&nbsp;· Alzira&nbsp;/&nbsp;Valencia"
+
+title.es = "Construimos y reformamos, <em>de principio a fin.</em>"
+title.va = "Construïm i reformem, <em>de principi a fi.</em>"
+title.en = "We build and renovate, <em>from start to finish.</em>"
+
+lead.es = "Nos encargamos tanto del diseño y la gestión de licencias como de la ejecución completa de tu obra. Con arquitecto en plantilla, gremios propios y visualización previa en&nbsp;3D."
+lead.va = "Ens encarreguem tant del disseny i la gestió de llicències com de l'execució completa de la teua obra. Amb arquitecte en plantilla, gremis propis i visualització prèvia en&nbsp;3D."
+lead.en = "We take care of the design and planning permits as well as the complete execution of your project. With an in-house architect, our own trades and a 3D preview before work&nbsp;begins."
+
+cta.es = "Pide presupuesto sin compromiso"
+cta.va = "Demana pressupost sense compromís"
+cta.en = "Request a no-obligation quote"
+
+plan_tag.es = "Plano"
+plan_tag.va = "Plànol"
+plan_tag.en = "Plan"
+
+render_tag.es = "Visualización 3D"
+render_tag.va = "Visualització 3D"
+render_tag.en = "3D visualisation"
+
+compare_label.es = "Comparar el plano con la visualización 3D"
+compare_label.va = "Compara el plànol amb la visualització 3D"
+compare_label.en = "Compare the plan with the 3D visualisation"
+
+compare_value.es = "50 % plano, 50 % visualización 3D"
+compare_value.va = "50 % plànol, 50 % visualització 3D"
+compare_value.en = "50% plan, 50% 3D visualisation"
+
+hint.es = "Desliza"
+hint.va = "Llisca"
+hint.en = "Drag"
+
+caption.es = "Así verás tu obra antes de empezar: el proyecto de nuestro arquitecto y su visualización en 3D."
+caption.va = "Així veuràs la teua obra abans de començar: el projecte del nostre arquitecte i la seua visualització en 3D."
+caption.en = "This is how you'll see your project before we start: our architect's design and its 3D visualisation."
+
+plan_alt.es = "Plano isométrico de una vivienda con cotas"
+plan_alt.va = "Plànol isomètric d'un habitatge amb cotes"
+plan_alt.en = "Isometric plan of a house with dimensions"
+
+render_alt.es = "Visualización 3D de la misma vivienda terminada"
+render_alt.va = "Visualització 3D del mateix habitatge acabat"
+render_alt.en = "3D visualisation of the same house, finished"
+
+[facts]
+f1_title.es = "Más de 30 años"
+f1_title.va = "Més de 30 anys"
+f1_title.en = "Over 30 years"
+f1_text.es = "de experiencia en construcción y reformas"
+f1_text.va = "d'experiència en construcció i reformes"
+f1_text.en = "of experience in construction and renovation"
+
+f2_title.es = "Arquitecto en plantilla"
+f2_title.va = "Arquitecte en plantilla"
+f2_title.en = "In-house architect"
+f2_text.es = "para obra nueva e interiorismo"
+f2_text.va = "per a obra nova i interiorisme"
+f2_text.en = "for new builds and interior design"
+
+f3_title.es = "Visualización 3D"
+f3_title.va = "Visualització 3D"
+f3_title.en = "3D visualisation"
+f3_text.es = "de tu proyecto antes de empezar"
+f3_text.va = "del teu projecte abans de començar"
+f3_text.en = "of your project before work starts"
+
+f4_title.es = "Gremios propios"
+f4_title.va = "Gremis propis"
+f4_title.en = "Our own trades"
+f4_text.es = "coordinados de principio a fin"
+f4_text.va = "coordinats de principi a fi"
+f4_text.en = "coordinated from start to finish"
+
+[ticker]
+t1.es = "Obra nueva"
+t1.va = "Obra nova"
+t1.en = "New builds"
+t2.es = "Reformas integrales"
+t2.va = "Reformes integrals"
+t2.en = "Full renovations"
+t3.es = "Reformas parciales"
+t3.va = "Reformes parcials"
+t3.en = "Partial renovations"
+t4.es = "Rehabilitación de fachadas"
+t4.va = "Rehabilitació de façanes"
+t4.en = "Façade restoration"
+t5.es = "Ascensores a cota cero"
+t5.va = "Ascensors a cota zero"
+t5.en = "Step-free lifts"
+t6.es = "Barreras arquitectónicas"
+t6.va = "Barreres arquitectòniques"
+t6.en = "Accessibility works"
+t7.es = "Interiorismo"
+t7.va = "Interiorisme"
+t7.en = "Interior design"
+t8.es = "Gestión de licencias"
+t8.va = "Gestió de llicències"
+t8.en = "Planning permits"
+t9.es = "Albañilería"
+t9.va = "Albanyileria"
+t9.en = "Masonry"
+
+[servicios]
+eyebrow.es = "Servicios"
+eyebrow.va = "Serveis"
+eyebrow.en = "Services"
+
+title.es = "Todo lo que necesita tu obra, <em>en un solo equipo.</em>"
+title.va = "Tot el que necessita la teua obra, <em>en un sol equip.</em>"
+title.en = "All your project needs, <em>in one team.</em>"
+
+lead.es = "F2F cuenta con el equipo necesario para realizar cualquier obra: arquitecto, constructor y operarios propios. Así controlamos cada fase, del proyecto a los acabados."
+lead.va = "F2F compta amb l'equip necessari per a fer qualsevol obra: arquitecte, constructor i operaris propis. Així controlem cada fase, del projecte als acabats."
+lead.en = "F2F has the team to carry out any kind of building work: an architect, a builder and our own workers. That's how we keep every stage under control, from design to finishes."
+
+s1_title.es = "Obra nueva"
+s1_title.va = "Obra nova"
+s1_title.en = "New builds"
+s1_text.es = "Construimos viviendas, locales comerciales y otros espacios, con el proyecto de nuestro propio arquitecto."
+s1_text.va = "Construïm habitatges, locals comercials i altres espais, amb el projecte del nostre propi arquitecte."
+s1_text.en = "We build homes, commercial premises and other spaces, designed by our own architect."
+
+s2_title.es = "Reformas integrales"
+s2_title.va = "Reformes integrals"
+s2_title.en = "Full renovations"
+s2_text.es = "Reformas completas de principio a fin con gremios propios, coordinando cada oficio y cumpliendo los plazos."
+s2_text.va = "Reformes completes de principi a fi amb gremis propis, coordinant cada ofici i complint els terminis."
+s2_text.en = "Complete renovations from start to finish with our own trades, coordinating every job and meeting deadlines."
+
+s3_title.es = "Reformas parciales"
+s3_title.va = "Reformes parcials"
+s3_title.en = "Partial renovations"
+s3_text.es = "Actuamos solo donde lo necesitas, con el mismo cuidado y la misma supervisión que en una obra completa."
+s3_text.va = "Actuem només on ho necessites, amb la mateixa cura i la mateixa supervisió que en una obra completa."
+s3_text.en = "We work only where you need us, with the same care and supervision as on a complete project."
+
+s4_title.es = "Rehabilitación de fachadas"
+s4_title.va = "Rehabilitació de façanes"
+s4_title.en = "Façade restoration"
+s4_text.es = "Recuperamos y renovamos fachadas de viviendas y edificios para devolverles su mejor aspecto."
+s4_text.va = "Recuperem i renovem façanes d'habitatges i edificis per a retornar-los el seu millor aspecte."
+s4_text.en = "We restore and renovate the façades of homes and buildings to bring back their best look."
+
+s5_title.es = "Accesibilidad y ascensores a cota&nbsp;0"
+s5_title.va = "Accessibilitat i ascensors a cota&nbsp;0"
+s5_title.en = "Accessibility &amp; step-free lifts"
+s5_text.es = "Experiencia en eliminación de barreras arquitectónicas y en bajada de ascensores a cota cero."
+s5_text.va = "Experiència en eliminació de barreres arquitectòniques i en baixada d'ascensors a cota zero."
+s5_text.en = "Experience in removing architectural barriers and in bringing lifts down to street level for step-free access."
+
+s6_title.es = "Diseño, interiorismo y 3D"
+s6_title.va = "Disseny, interiorisme i 3D"
+s6_title.en = "Design, interiors &amp; 3D"
+s6_text.es = "Proyectos de obra nueva e interiorismo con visualización previa en 3D, para que veas el resultado antes de empezar."
+s6_text.va = "Projectes d'obra nova i interiorisme amb visualització prèvia en 3D, perquè veges el resultat abans de començar."
+s6_text.en = "New-build and interior design projects with a 3D preview, so you can see the result before we start."
+
+s7_title.es = "Gestión de licencias"
+s7_title.va = "Gestió de llicències"
+s7_title.en = "Permits &amp; licences"
+s7_text.es = "Nos ocupamos del diseño y de la tramitación de las licencias, para que tú no tengas que preocuparte del papeleo."
+s7_text.va = "Ens ocupem del disseny i de la tramitació de les llicències, perquè tu no hages de preocupar-te de la paperassa."
+s7_text.en = "We handle the design and the licence applications, so you don't have to worry about the paperwork."
+
+s8_title.es = "Albañilería"
+s8_title.va = "Albanyileria"
+s8_title.en = "Masonry"
+s8_text.es = "Realizamos todo tipo de trabajos de albañilería, con un equipo de profesionales propio."
+s8_text.va = "Fem tota classe de treballs d'albanyileria, amb un equip de professionals propi."
+s8_text.en = "We carry out all kinds of masonry work with our own team of professionals."
+
+[metodo]
+eyebrow.es = "Cómo trabajamos"
+eyebrow.va = "Com treballem"
+eyebrow.en = "How we work"
+
+title.es = "Tu obra, <em>paso a paso.</em>"
+title.va = "La teua obra, <em>pas a pas.</em>"
+title.en = "Your project, <em>step by step.</em>"
+
+p1_title.es = "Presupuesto sin compromiso"
+p1_title.va = "Pressupost sense compromís"
+p1_title.en = "No-obligation quote"
+p1_text.es = "Nos cuentas qué necesitas y te preparamos un presupuesto sin compromiso para la obra que desees."
+p1_text.va = "Ens contes què necessites i et preparem un pressupost sense compromís per a l'obra que desitges."
+p1_text.en = "Tell us what you need and we'll prepare a no-obligation quote for the work you have in mind."
+
+p2_title.es = "Diseño y visualización 3D"
+p2_title.va = "Disseny i visualització 3D"
+p2_title.en = "Design &amp; 3D visualisation"
+p2_text.es = "Nuestro arquitecto desarrolla el proyecto y te lo mostramos en 3D antes de empezar."
+p2_text.va = "El nostre arquitecte desenvolupa el projecte i te'l mostrem en 3D abans de començar."
+p2_text.en = "Our architect develops the project and we show it to you in 3D before we start."
+
+p3_title.es = "Gestión de licencias"
+p3_title.va = "Gestió de llicències"
+p3_title.en = "Permits"
+p3_text.es = "Tramitamos las licencias y permisos necesarios para tu obra."
+p3_text.va = "Tramitem les llicències i els permisos necessaris per a la teua obra."
+p3_text.en = "We apply for all the licences and permits your project needs."
+
+p4_title.es = "Ejecución con gremios propios"
+p4_title.va = "Execució amb gremis propis"
+p4_title.en = "Our own trades on site"
+p4_text.es = "Coordinamos los diferentes oficios y hacemos que se cumplan los plazos."
+p4_text.va = "Coordinem els diferents oficis i fem que es complisquen els terminis."
+p4_text.en = "We coordinate the different trades and make sure deadlines are met."
+
+p5_title.es = "Acabados a tu gusto"
+p5_title.va = "Acabats al teu gust"
+p5_title.en = "Finishes to your taste"
+p5_text.es = "Supervisamos cada acabado para que el resultado sea tal y como lo imaginaste."
+p5_text.va = "Supervisem cada acabat perquè el resultat siga tal com l'havies imaginat."
+p5_text.en = "We supervise every finish so the result is exactly as you imagined it."
+
+[perfil]
+eyebrow.es = "Perfil"
+eyebrow.va = "Perfil"
+eyebrow.en = "About us"
+
+title.es = "Una vida dedicada a la <em>albañilería</em> y a la <em>dirección de obras.</em>"
+title.va = "Una vida dedicada a <em>l'albanyileria</em> i a la <em>direcció d'obres.</em>"
+title.en = "A lifetime devoted to <em>masonry</em> and <em>site management.</em>"
+
+years_hidden.es = "Más de 30"
+years_hidden.va = "Més de 30"
+years_hidden.en = "Over 30"
+years_text.es = "años de experiencia en construcción y reformas"
+years_text.va = "anys d'experiència en construcció i reformes"
+years_text.en = "years of experience in construction and renovation"
+
+lead.es = "Construcciones y Reformas F2F es una empresa con una vida dedicada a la construcción, que ha querido digitalizarse y dar a conocer sus servicios de una manera renovada, acorde a nuestros tiempos y tecnologías."
+lead.va = "Construcciones y Reformas F2F és una empresa amb una vida dedicada a la construcció, que ha volgut digitalitzar-se i donar a conéixer els seus serveis d'una manera renovada, d'acord amb els nostres temps i tecnologies."
+lead.en = "Construcciones y Reformas F2F is a company with a lifetime devoted to construction that has decided to go digital and present its services in a fresh way, in step with today's times and technology."
+
+text.es = "En F2F contamos con el equipo necesario para realizar cualquier trabajo de obra: arquitecto, constructor y operarios propios. Nos encargamos de la obra o reforma de principio a fin, coordinando los diferentes gremios y haciendo que se cumplan los plazos, asegurando la confianza y la total participación del cliente."
+text.va = "A F2F comptem amb l'equip necessari per a fer qualsevol treball d'obra: arquitecte, constructor i operaris propis. Ens encarreguem de l'obra o reforma de principi a fi, coordinant els diferents gremis i fent que es complisquen els terminis, assegurant la confiança i la participació total del client."
+text.en = "At F2F we have the team to carry out any kind of building work: an architect, a builder and our own workers. We manage your build or renovation from start to finish, coordinating the different trades and making sure deadlines are met, so you can build with confidence and stay fully involved."
+
+team1_title.es = "Arquitecto"
+team1_title.va = "Arquitecte"
+team1_title.en = "Architect"
+team1_text.es = "Proyectos de obra nueva e interiorismo, con visualización previa en 3D."
+team1_text.va = "Projectes d'obra nova i interiorisme, amb visualització prèvia en 3D."
+team1_text.en = "New-build and interior design projects, with a 3D preview."
+
+team2_title.es = "Constructor"
+team2_title.va = "Constructor"
+team2_title.en = "Builder"
+team2_text.es = "Dirección de obra y coordinación de los gremios, cumpliendo los plazos."
+team2_text.va = "Direcció d'obra i coordinació dels gremis, complint els terminis."
+team2_text.en = "Site management and coordination of every trade, meeting deadlines."
+
+team3_title.es = "Operarios propios"
+team3_title.va = "Operaris propis"
+team3_title.en = "Our own workers"
+team3_text.es = "Un equipo propio para todo tipo de trabajos de albañilería y reforma."
+team3_text.va = "Un equip propi per a tota classe de treballs d'albanyileria i reforma."
+team3_text.en = "Our own team for all kinds of masonry and renovation work."
+
+[proyectos]
+eyebrow.es = "Proyectos"
+eyebrow.va = "Projectes"
+eyebrow.en = "Projects"
+
+title.es = "Nuestro trabajo, <em>obra a obra.</em>"
+title.va = "El nostre treball, <em>obra a obra.</em>"
+title.en = "Our work, <em>project by project.</em>"
+
+lead.es = "Previsualización de tu proyecto y supervisión de los acabados a tu gusto. Estas son algunas de las obras que hemos realizado."
+lead.va = "Previsualització del teu projecte i supervisió dels acabats al teu gust. Estes són algunes de les obres que hem fet."
+lead.en = "A preview of your project and finishes supervised to your taste. Here are some of the projects we have completed."
+
+tag_rehab.es = "Rehabilitación"
+tag_rehab.va = "Rehabilitació"
+tag_rehab.en = "Restoration"
+tag_reforma.es = "Reforma"
+tag_reforma.va = "Reforma"
+tag_reforma.en = "Renovation"
+tag_access.es = "Accesibilidad"
+tag_access.va = "Accessibilitat"
+tag_access.en = "Accessibility"
+
+p1_title.es = "Rehabilitación de fachada"
+p1_title.va = "Rehabilitació de façana"
+p1_title.en = "Façade restoration"
+p2_title.es = "Reforma parcial"
+p2_title.va = "Reforma parcial"
+p2_title.en = "Partial renovation"
+p3_title.es = "Reforma integral"
+p3_title.va = "Reforma integral"
+p3_title.en = "Full renovation"
+p4_title.es = "Ascensor a cota 0"
+p4_title.va = "Ascensor a cota 0"
+p4_title.en = "Step-free lift"
+
+# Rótulos de los dibujos técnicos de las fichas de proyecto (en mayúsculas)
+[drawing]
+fachada_label.es = "ALZADO PRINCIPAL · REHABILITACIÓN"
+fachada_label.va = "ALÇAT PRINCIPAL · REHABILITACIÓ"
+fachada_label.en = "FRONT ELEVATION · RESTORATION"
+zona.es = "ZONA DE ACTUACIÓN"
+zona.va = "ZONA D'ACTUACIÓ"
+zona.en = "WORK AREA"
+parcial_label.es = "PLANTA · REFORMA PARCIAL"
+parcial_label.va = "PLANTA · REFORMA PARCIAL"
+parcial_label.en = "FLOOR PLAN · PARTIAL RENOVATION"
+parcial_rooms.es = "COCINA + BAÑO"
+parcial_rooms.va = "CUINA + BANY"
+parcial_rooms.en = "KITCHEN + BATHROOM"
+integral_label.es = "PLANTA · REFORMA INTEGRAL"
+integral_label.va = "PLANTA · REFORMA INTEGRAL"
+integral_label.en = "FLOOR PLAN · FULL RENOVATION"
+integral_note.es = "ACTUACIÓN COMPLETA"
+integral_note.va = "ACTUACIÓ COMPLETA"
+integral_note.en = "WHOLE-HOME WORKS"
+ascensor_label.es = "SECCIÓN · PORTAL Y ASCENSOR"
+ascensor_label.va = "SECCIÓ · PORTAL I ASCENSOR"
+ascensor_label.en = "SECTION · ENTRANCE AND LIFT"
+cota0.es = "COTA 0"
+cota0.va = "COTA 0"
+cota0.en = "LEVEL 0"
+
+[cta]
+title.es = "¿Tienes una obra en&nbsp;mente?"
+title.va = "Tens una obra en&nbsp;ment?"
+title.en = "Have a project in&nbsp;mind?"
+
+text.es = "Pídenos presupuesto sin compromiso o contáctanos para cualquier duda."
+text.va = "Demana'ns pressupost sense compromís o contacta amb nosaltres per a qualsevol dubte."
+text.en = "Ask us for a no-obligation quote or get in touch with any questions."
+
+call.es = "Llamar al 620&nbsp;218&nbsp;734"
+call.va = "Telefona al 620&nbsp;218&nbsp;734"
+call.en = "Call 620&nbsp;218&nbsp;734"
+
+whatsapp.es = "Escribir por WhatsApp"
+whatsapp.va = "Escriu-nos per WhatsApp"
+whatsapp.en = "Message us on WhatsApp"
+
+[contacto]
+eyebrow.es = "Contacto"
+eyebrow.va = "Contacte"
+eyebrow.en = "Contact"
+
+title.es = "Hablemos de <em>tu proyecto.</em>"
+title.va = "Parlem del <em>teu projecte.</em>"
+title.en = "Let's talk about <em>your project.</em>"
+
+lead.es = "Atención al cliente y consultas. Llámanos, escríbenos por WhatsApp o déjanos tu mensaje y te preparamos un presupuesto sin compromiso."
+lead.va = "Atenció al client i consultes. Telefona'ns, escriu-nos per WhatsApp o deixa'ns el teu missatge i et preparem un pressupost sense compromís."
+lead.en = "Customer service and enquiries. Call us, message us on WhatsApp or leave us a message and we'll prepare a no-obligation quote for you."
+
+phone_label.es = "Teléfono y WhatsApp"
+phone_label.va = "Telèfon i WhatsApp"
+phone_label.en = "Phone &amp; WhatsApp"
+
+email_label.es = "Email"
+email_label.va = "Correu electrònic"
+email_label.en = "Email"
+
+address_label.es = "Dirección"
+address_label.va = "Adreça"
+address_label.en = "Address"
+
+address_line2.es = "46792 La Barraca d'Aigües Vives, Alzira (Valencia)"
+address_line2.va = "46792 La Barraca d'Aigües Vives, Alzira (València)"
+address_line2.en = "46792 La Barraca d'Aigües Vives, Alzira (Valencia), Spain"
+
+directions.es = "Cómo llegar"
+directions.va = "Com arribar-hi"
+directions.en = "Get directions"
+
+zone_label.es = "Zona de trabajo"
+zone_label.va = "Zona de treball"
+zone_label.en = "Service area"
+
+zone_value.es = "Alzira y provincia de Valencia"
+zone_value.va = "Alzira i província de València"
+zone_value.en = "Alzira and the province of Valencia"
+
+form_title.es = "Cuéntanos tu proyecto"
+form_title.va = "Conta'ns el teu projecte"
+form_title.en = "Tell us about your project"
+
+form_intro.es = "Rellena los datos y envíanoslo por WhatsApp o por email."
+form_intro.va = "Omple les dades i envia-les per WhatsApp o per correu electrònic."
+form_intro.en = "Fill in your details and send them to us via WhatsApp or email."
+
+name.es = "Nombre"
+name.va = "Nom"
+name.en = "Name"
+
+phone.es = "Teléfono"
+phone.va = "Telèfon"
+phone.en = "Phone"
+
+town.es = "Localidad"
+town.va = "Localitat"
+town.en = "Town"
+
+type.es = "Tipo de obra"
+type.va = "Tipus d'obra"
+type.en = "Type of work"
+
+chip1.es = "Obra nueva"
+chip1.va = "Obra nova"
+chip1.en = "New build"
+chip2.es = "Reforma integral"
+chip2.va = "Reforma integral"
+chip2.en = "Full renovation"
+chip3.es = "Reforma parcial"
+chip3.va = "Reforma parcial"
+chip3.en = "Partial renovation"
+chip4.es = "Fachada"
+chip4.va = "Façana"
+chip4.en = "Façade"
+chip5.es = "Accesibilidad / ascensor"
+chip5.va = "Accessibilitat / ascensor"
+chip5.en = "Accessibility / lift"
+chip6.es = "Otro"
+chip6.va = "Altres"
+chip6.en = "Other"
+
+message.es = "Mensaje"
+message.va = "Missatge"
+message.en = "Message"
+
+placeholder.es = "Cuéntanos qué obra quieres hacer, metros aproximados, plazos…"
+placeholder.va = "Conta'ns quina obra vols fer, metres aproximats, terminis…"
+placeholder.en = "Tell us what work you'd like to do, approximate size, timescales…"
+
+send_whatsapp.es = "Enviar por WhatsApp"
+send_whatsapp.va = "Envia per WhatsApp"
+send_whatsapp.en = "Send via WhatsApp"
+
+send_email.es = "Enviar por email"
+send_email.va = "Envia per correu"
+send_email.en = "Send by email"
+
+note.es = "Se abrirá WhatsApp o tu correo con el mensaje ya escrito. Esta web no guarda tus datos."
+note.va = "S'obrirà WhatsApp o el teu correu amb el missatge ja escrit. Esta web no guarda les teues dades."
+note.en = "WhatsApp or your email app will open with the message already written. This website does not store your data."
+
+[footer]
+about.es = "Construcción y reformas en Alzira (Valencia) con más de 30 años de experiencia. Del diseño y las licencias a la ejecución completa de tu obra."
+about.va = "Construcció i reformes a Alzira (València) amb més de 30 anys d'experiència. Del disseny i les llicències a l'execució completa de la teua obra."
+about.en = "Construction and renovation in Alzira (Valencia) with over 30 years of experience. From design and permits to the complete execution of your project."
+
+nav_title.es = "Navegación"
+nav_title.va = "Navegació"
+nav_title.en = "Navigation"
+
+contact_title.es = "Contacto"
+contact_title.va = "Contacte"
+contact_title.en = "Contact"
+
+address.es = "C/ Matilde Malo, 4 · 46792 La Barraca d'Aigües Vives, Alzira (Valencia)"
+address.va = "C/ Matilde Malo, 4 · 46792 La Barraca d'Aigües Vives, Alzira (València)"
+address.en = "C/ Matilde Malo, 4 · 46792 La Barraca d'Aigües Vives, Alzira (Valencia), Spain"
+
+top.es = "Volver arriba"
+top.va = "Torna amunt"
+top.en = "Back to top"
+
+# Enlaces de WhatsApp: mensaje con el que se abre la conversación
+[wa]
+text.es = "Hola, me gustaría pedir presupuesto para una obra."
+text.va = "Hola, m'agradaria demanar pressupost per a una obra."
+text.en = "Hello, I'd like to request a quote for some building work."
+
+float_label.es = "Escríbenos por WhatsApp"
+float_label.va = "Escriu-nos per WhatsApp"
+float_label.en = "Message us on WhatsApp"
+
+# Mensajes del JavaScript (menú, comparador, formulario y galería)
+[js]
+menu_open.es = "Abrir menú"
+menu_open.va = "Obri el menú"
+menu_open.en = "Open menu"
+
+menu_close.es = "Cerrar menú"
+menu_close.va = "Tanca el menú"
+menu_close.en = "Close menu"
+
+compare_value.es = "{p} % plano, {q} % visualización 3D"
+compare_value.va = "{p} % plànol, {q} % visualització 3D"
+compare_value.en = "{p}% plan, {q}% 3D visualisation"
+
+form_error.es = "Por favor, indica tu nombre, tu teléfono y el mensaje."
+form_error.va = "Per favor, indica el teu nom, el teu telèfon i el missatge."
+form_error.en = "Please enter your name, your phone number and a message."
+
+form_ok_whatsapp.es = "Se ha abierto WhatsApp con tu mensaje: solo tienes que pulsar «Enviar». Si no se abre, llámanos al 620 218 734."
+form_ok_whatsapp.va = "S'ha obert WhatsApp amb el teu missatge: només has de polsar «Envia». Si no s'obri, telefona'ns al 620 218 734."
+form_ok_whatsapp.en = "WhatsApp has opened with your message: just press Send. If it doesn't open, call us on 620 218 734."
+
+form_ok_email.es = "Se ha abierto tu correo con el mensaje ya escrito. Si no se abre, escríbenos a {email}."
+form_ok_email.va = "S'ha obert el teu correu amb el missatge ja escrit. Si no s'obri, escriu-nos a {email}."
+form_ok_email.en = "Your email app has opened with the message ready to send. If it doesn't open, write to us at {email}."
+
+msg_hello.es = "Hola, soy {name}."
+msg_hello.va = "Hola, em dic {name}."
+msg_hello.en = "Hello, my name is {name}."
+
+msg_type.es = "Tipo de obra: {value}"
+msg_type.va = "Tipus d'obra: {value}"
+msg_type.en = "Type of work: {value}"
+
+msg_town.es = "Localidad: {value}"
+msg_town.va = "Localitat: {value}"
+msg_town.en = "Town: {value}"
+
+msg_phone.es = "Teléfono: {value}"
+msg_phone.va = "Telèfon: {value}"
+msg_phone.en = "Phone: {value}"
+
+mail_subject.es = "Solicitud de presupuesto"
+mail_subject.va = "Sol·licitud de pressupost"
+mail_subject.en = "Quote request"
+
+gallery_label.es = "Galería de fotos"
+gallery_label.va = "Galeria de fotos"
+gallery_label.en = "Photo gallery"
+
+gallery_prev.es = "Foto anterior"
+gallery_prev.va = "Foto anterior"
+gallery_prev.en = "Previous photo"
+
+gallery_next.es = "Foto siguiente"
+gallery_next.va = "Foto següent"
+gallery_next.en = "Next photo"
+
+gallery_close.es = "Cerrar galería"
+gallery_close.va = "Tanca la galeria"
+gallery_close.en = "Close gallery"
+
+photo_alt.es = "{label} (foto {n} de {total})"
+photo_alt.va = "{label} (foto {n} de {total})"
+photo_alt.en = "{label} (photo {n} of {total})"
+
+view_photos.es = "Ver fotos ({total})"
+view_photos.va = "Veure fotos ({total})"
+view_photos.en = "View photos ({total})"
+
+in_place.es = "{title} en {place}"
+in_place.va = "{title} a {place}"
+in_place.en = "{title} in {place}"

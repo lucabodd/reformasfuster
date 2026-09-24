@@ -10,6 +10,14 @@
   const PHONE = '34620218734';
   const EMAIL = 'construccionesf2f@gmail.com';
 
+  /* textos en el idioma de la página: los genera tools/build.py a partir de src/i18n.toml */
+  const STRINGS = (() => {
+    try { return JSON.parse($('#i18n')?.textContent || '{}'); } catch { return {}; }
+  })();
+  const t = (key, vars = {}) => (STRINGS[key] ?? key).replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
+  // raíz de la web (las páginas de /va/ y /en/ están un nivel más abajo)
+  const siteRoot = new URL(root.dataset.root || './', window.location.href);
+
   /* ------------------------------------------------------------ año del pie */
   $$('[data-year]').forEach((el) => { el.textContent = String(new Date().getFullYear()); });
 
@@ -31,7 +39,7 @@
     if (!toggle) return;
     root.classList.toggle('nav-open', open);
     toggle.setAttribute('aria-expanded', String(open));
-    $('.visually-hidden', toggle).textContent = open ? 'Cerrar menú' : 'Abrir menú';
+    $('.visually-hidden', toggle).textContent = open ? t('menu_close') : t('menu_open');
     ['#main', '.site-footer'].forEach((sel) => { const el = $(sel); if (el) el.inert = open; });
   };
   toggle?.addEventListener('click', () => setNav(toggle.getAttribute('aria-expanded') !== 'true'));
@@ -42,15 +50,17 @@
       toggle.focus();
     }
   });
-  window.matchMedia('(min-width: 921px)').addEventListener('change', (e) => { if (e.matches) setNav(false); });
+  window.matchMedia('(min-width: 1200px)').addEventListener('change', (e) => { if (e.matches) setNav(false); });
 
   /* ------------------------------------------------------------ enlace activo del menú */
   const navLinks = $$('.nav__list a[href^="#"]');
   const spyTargets = ['#inicio', ...navLinks.map((a) => a.getAttribute('href'))].map((id) => $(id)).filter(Boolean);
+  let currentSection = '';
   if ('IntersectionObserver' in window && spyTargets.length) {
     const spy = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
+        currentSection = entry.target.id === 'inicio' ? '' : entry.target.id;
         navLinks.forEach((a) => {
           if (a.getAttribute('href') === `#${entry.target.id}`) a.setAttribute('aria-current', 'true');
           else a.removeAttribute('aria-current');
@@ -59,6 +69,11 @@
     }, { rootMargin: '-45% 0px -50% 0px' });
     spyTargets.forEach((section) => spy.observe(section));
   }
+
+  /* ------------------------------------------------------------ cambio de idioma: se mantiene la sección que se está leyendo */
+  $$('[data-lang-link]').forEach((a) => {
+    a.addEventListener('click', () => { a.hash = currentSection ? `#${currentSection}` : ''; });
+  });
 
   /* ------------------------------------------------------------ aparición al hacer scroll */
   const revealEls = $$('[data-reveal]');
@@ -94,7 +109,7 @@
       compare.style.setProperty('--pos', `${pos}%`);
       const p = Math.round(pos);
       handle.setAttribute('aria-valuenow', String(p));
-      handle.setAttribute('aria-valuetext', `${p} % plano, ${100 - p} % visualización 3D`);
+      handle.setAttribute('aria-valuetext', t('compare_value', { p, q: 100 - p }));
     };
     const stopIntro = () => {
       introRunning = false;
@@ -158,13 +173,13 @@
       set(100);
       const start = performance.now() + 1500;
       const duration = 1500;
-      const ease = (t) => 1 - Math.pow(1 - t, 3);
+      const ease = (x) => 1 - Math.pow(1 - x, 3);
       introRunning = true;
       const tick = (now) => {
         if (!introRunning) return;
-        const t = Math.min(1, Math.max(0, (now - start) / duration));
-        set(100 - 50 * ease(t));
-        if (t < 1) introFrame = requestAnimationFrame(tick);
+        const progress = Math.min(1, Math.max(0, (now - start) / duration));
+        set(100 - 50 * ease(progress));
+        if (progress < 1) introFrame = requestAnimationFrame(tick);
         else introRunning = false;
       };
       introFrame = requestAnimationFrame(tick);
@@ -191,7 +206,7 @@
       const missing = required.filter((name) => !val(name));
       required.forEach((name) => form.elements[name].setAttribute('aria-invalid', String(missing.includes(name))));
       if (missing.length) {
-        errorBox.textContent = 'Por favor, indica tu nombre, tu teléfono y el mensaje.';
+        errorBox.textContent = t('form_error');
         errorBox.hidden = false;
         okBox.hidden = true;
         form.elements[missing[0]].focus();
@@ -200,22 +215,22 @@
       errorBox.hidden = true;
 
       const tipo = $('input[name="tipo"]:checked', form)?.value;
-      const lines = [`Hola, soy ${val('nombre')}.`];
-      if (tipo) lines.push(`Tipo de obra: ${tipo}`);
-      if (val('localidad')) lines.push(`Localidad: ${val('localidad')}`);
-      lines.push(`Teléfono: ${val('telefono')}`, '', val('mensaje'));
+      const lines = [t('msg_hello', { name: val('nombre') })];
+      if (tipo) lines.push(t('msg_type', { value: tipo }));
+      if (val('localidad')) lines.push(t('msg_town', { value: val('localidad') }));
+      lines.push(t('msg_phone', { value: val('telefono') }), '', val('mensaje'));
       const text = lines.join('\n');
 
       if (channel === 'email') {
-        const subject = `Solicitud de presupuesto${tipo ? ` – ${tipo}` : ''}`;
+        const subject = `${t('mail_subject')}${tipo ? ` – ${tipo}` : ''}`;
         window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
-        okBox.textContent = `Se ha abierto tu correo con el mensaje ya escrito. Si no se abre, escríbenos a ${EMAIL}.`;
+        okBox.textContent = t('form_ok_email', { email: EMAIL });
       } else {
         const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
         const win = window.open(url, '_blank');
         if (win) win.opener = null;
         else window.location.href = url;
-        okBox.textContent = 'Se ha abierto WhatsApp con tu mensaje: solo tienes que pulsar «Enviar». Si no se abre, llámanos al 620 218 734.';
+        okBox.textContent = t('form_ok_whatsapp');
       }
       okBox.hidden = false;
     });
@@ -232,17 +247,20 @@
   const buildLightbox = () => {
     const dlg = document.createElement('dialog');
     dlg.className = 'lightbox';
-    dlg.setAttribute('aria-label', 'Galería de fotos');
+    dlg.setAttribute('aria-label', t('gallery_label'));
     dlg.innerHTML = `
       <div class="lightbox__stage">
         <img class="lightbox__img" alt="">
-        <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Foto anterior"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg></button>
-        <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Foto siguiente"><svg class="icon" aria-hidden="true"><use href="#i-chev-right"/></svg></button>
+        <button class="lightbox__nav lightbox__nav--prev" type="button"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg></button>
+        <button class="lightbox__nav lightbox__nav--next" type="button"><svg class="icon" aria-hidden="true"><use href="#i-chev-right"/></svg></button>
       </div>
       <div class="lightbox__bar">
         <p class="lightbox__caption" aria-live="polite"></p>
-        <button class="lightbox__close" type="button" aria-label="Cerrar galería" autofocus><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+        <button class="lightbox__close" type="button" autofocus><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
       </div>`;
+    $('.lightbox__nav--prev', dlg).setAttribute('aria-label', t('gallery_prev'));
+    $('.lightbox__nav--next', dlg).setAttribute('aria-label', t('gallery_next'));
+    $('.lightbox__close', dlg).setAttribute('aria-label', t('gallery_close'));
     document.body.append(dlg);
 
     const img = $('.lightbox__img', dlg);
@@ -255,7 +273,7 @@
       const n = state.photos.length;
       state.index = (i + n) % n;
       img.src = state.photos[state.index];
-      img.alt = `${state.label} (foto ${state.index + 1} de ${n})`;
+      img.alt = t('photo_alt', { label: state.label, n: state.index + 1, total: n });
       caption.textContent = `${state.label} · ${state.index + 1} / ${n}`;
       prev.hidden = next.hidden = n < 2;
     };
@@ -290,12 +308,13 @@
   };
 
   $$('[data-gallery]').forEach((card) => {
-    const photos = card.dataset.gallery.split(',').map((s) => s.trim()).filter(Boolean);
+    const photos = card.dataset.gallery.split(',').map((s) => s.trim()).filter(Boolean)
+      .map((src) => new URL(src, siteRoot).href);
     if (!photos.length) return;
 
-    const title = $('h3', card)?.textContent.trim() || 'Proyecto';
+    const title = $('h3', card)?.textContent.trim() || '';
     const place = $('.project__loc', card)?.textContent.trim();
-    const label = place ? `${title} en ${place}` : title;
+    const label = place ? t('in_place', { title, place }) : title;
     const media = $('.project__media', card);
 
     const cover = new Image();
@@ -310,8 +329,9 @@
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'project__open';
-    btn.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#i-photo"/></svg> Ver fotos (${photos.length})`;
-    btn.setAttribute('aria-label', `Ver fotos (${photos.length}): ${label}`);
+    btn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-photo"/></svg>';
+    btn.append(` ${t('view_photos', { total: photos.length })}`);
+    btn.setAttribute('aria-label', `${t('view_photos', { total: photos.length })}: ${label}`);
     $('.project__body', card).append(btn);
 
     const open = () => {
