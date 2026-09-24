@@ -18,6 +18,7 @@ src/i18n.toml           TUTTI I TESTI, nelle tre lingue una accanto all'altra
 src/partials/           pezzi inseriti nel modello: icone, illustrazione, disegni dei progetti
 tools/build.py          genera le pagine delle tre lingue a partire da src/
 tools/hero.py           rigenera l'illustrazione isometrica dell'intestazione
+tools/logo.py           rigenera il logo (SVG) dalle font del marchio
 
 index.html              ┐
 va/index.html           ├ GENERATI da tools/build.py: non modificarli a mano
@@ -28,11 +29,12 @@ perfil.html, proyectos.html, contacto.html
                         reindirizzano i vecchi indirizzi /perfil, /proyectos e /contacto
                         alla sezione corrispondente (link già condivisi o indicizzati)
 404.html                pagina "non trovata", nella lingua giusta in base al percorso
-favicon.svg, robots.txt
+favicon.svg, favicon.ico, manifest.webmanifest, robots.txt
+_redirects, _headers    redirect 301 e cache per Cloudflare Pages / Netlify (GitHub Pages li ignora)
 assets/css/styles.css   stili (colori e font in :root in cima al file)
 assets/js/main.js       menu mobile, slider piano/3D, modulo, galleria foto, cambio lingua
 assets/fonts/           Archivo e Instrument Serif in locale (licenza OFL), nessuna chiamata a Google Fonts
-assets/img/             anteprime social per lingua (og-image*.jpg), icona iOS, foto dei progetti
+assets/img/             anteprime social per lingua (og-image*.jpg), icone (iOS, Android, logo-icon.svg), foto dei progetti
 ```
 
 ## Modificare il sito
@@ -69,7 +71,7 @@ python3 -m http.server 8080
      ```
    - esegui `python3 tools/build.py`. Il sito mostra da solo la copertina, il pulsante "Ver fotos (N)" e la galleria a schermo intero.
 2. **Rilettura delle traduzioni.** Il valenciano segue la norma AVL (*teua*, *estes*, *complisquen*…) e l'inglese usa l'ortografia britannica (molti residenti britannici nella Comunitat Valenciana). Conviene comunque che le faccia rileggere un madrelingua, soprattutto per il lessico del settore.
-3. **Logo.** Il marchio attuale (casetta con quota) è provvisorio. Se l'azienda ha un logo suo, va sostituito in `src/index.html` (due `<svg class="brand__mark">`), in `favicon.svg` e in `assets/img/apple-touch-icon.png`.
+3. **Logo.** Il nuovo logo (vedi sotto) è una proposta: se all'azienda piace, è pronto; se invece ha già un logo suo e vuole tenerlo, va sostituito nei file elencati nella sezione "Logo".
 4. **Testi.** Sono presi dal sito attuale e riorganizzati. È meglio che il titolare li rilegga, soprattutto la sezione "Cómo trabajamos", che mette in fila come processo cose che sul vecchio sito erano sparse.
 5. **Aviso legal / privacidad.** In Spagna (LSSI) un sito aziendale deve avere un avviso legale con ragione sociale, NIF e indirizzo. Serve che l'azienda fornisca questi dati.
 
@@ -86,6 +88,45 @@ Il modulo non ha bisogno di un server: compone il messaggio **nella lingua della
 In alternativa **Cloudflare Pages** o **Netlify**: collega il repository, senza comando di build, con cartella di output `/`. Le pagine generate sono già nel repository.
 
 Se il sito attuale è su Wix con il dominio comprato lì, conviene prima trasferire il dominio (o almeno la gestione DNS) e solo dopo disdire il piano.
+
+## Logo
+
+Il logo è la parola **F2F**: le F in Archivo (peso 800, larghezza 125 %) e il **2 in Instrument Serif corsivo, color terracotta**. È lo stesso contrasto tra un bastoni largo e un corsivo con grazie che si vede in tutti i titoli del sito ("Construimos y reformamos, *de principio a fin*"). È generato da `tools/logo.py` a partire dalle font vere, quindi gli SVG sono tracciati e non dipendono da font installate.
+
+| File | Uso |
+|---|---|
+| `src/partials/logo-wordmark.svg` | intestazione e piè di pagina (colori via CSS: `.brand__f`, `.brand__two`) |
+| `assets/img/logo-icon.svg` | icona quadrata: F2F sotto una quota, su grafite |
+| `favicon.svg`, `favicon.ico` | favicon: solo il 2 corsivo, leggibile anche a 16 px |
+| `assets/img/apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` | icone per iOS e Android |
+
+Per rigenerare gli SVG: `pip install fonttools brotli`, poi `python3 tools/logo.py && python3 tools/build.py`. I PNG sono esportati da `logo-icon.svg` e `favicon.svg` (180, 192 e 512 px; ICO con 16/32/48 px).
+
+## SEO
+
+**Già fatto nel sito**
+
+- Title e description pensati per le ricerche locali ("empresa de reformas en Alzira", "reformes a Alzira", "builders in Alzira"), nelle tre lingue e dentro i limiti che Google mostra senza tagliarli. `tools/build.py` avvisa se superano ~62/160 caratteri.
+- H1 con attività e località ("Empresa de reformas y construcción en Alzira (Valencia)"), zona di lavoro (Alzira, la Ribera, provincia di Valencia) nei testi.
+- Sezione **Preguntas frecuentes**: 7 domande reali, utili per le ricerche a coda lunga e per le risposte dei motori con IA ("¿qué es bajar un ascensor a cota cero?").
+- Dati strutturati schema.org in un unico grafo: `GeneralContractor` (indirizzo, telefoni, mappa, zona servita, catalogo degli 8 servizi), `WebSite`, `WebPage` e `FAQPage`, nella lingua di ogni pagina. Il build verifica che il JSON-LD sia valido.
+- `hreflang` e `canonical` tra le tre lingue, `sitemap.xml` con le alternative, `robots.txt`, meta `robots` con anteprime grandi, Open Graph con immagine e testo alternativo per lingua.
+- Favicon in SVG e ICO (Google la mostra nei risultati), manifest, prestazioni alte (Lighthouse 97–100), CSS/JS con versione nell'URL per una cache lunga.
+
+**Da fare fuori dal sito (è quello che conta di più per la visibilità locale)**
+
+1. **Profilo dell'attività su Google (Google Business Profile).** È ciò che fa comparire l'azienda nella mappa quando si cerca "reformas Alzira". Rivendicarlo o crearlo, verificarlo, e compilarlo:
+   - categorie: *Contratista*, *Empresa de reformas*, *Empresa de construcción*;
+   - servizi e zona servita;
+   - orari;
+   - foto dei lavori;
+   - link a `https://www.f2fconstruccionesyreformas.com/`.
+   Nome, indirizzo e telefono devono essere **identici** a quelli del sito.
+2. **Recensioni Google** dei clienti reali: chiedere a ogni cliente soddisfatto di lasciarne una e rispondere sempre.
+3. **Google Search Console** (e Bing Webmaster Tools): verificare il dominio, inviare `sitemap.xml`, controllare indicizzazione e `hreflang`. Per la verifica via meta tag basta aggiungerlo in `src/index.html` e rigenerare.
+4. **Coerenza dei dati (NAP) nelle directory**: Páginas Amarillas, infoisinfo e simili devono avere lo stesso indirizzo e gli stessi telefoni del sito. Infoisinfo oggi la colloca a Llaurí. Se l'azienda ha profili social, aggiungerli a `sameAs` nel JSON-LD di `src/index.html`.
+5. **Contenuti**: quando ci saranno le foto, una pagina per ogni lavoro (es. "Rehabilitación de fachada en Alzira") con foto e descrizione è il contenuto che più aiuta a posizionarsi per servizio e località. Il sito è predisposto per aggiungerle.
+6. **Orari e fascia di prezzo**: se l'azienda li fornisce, vanno aggiunti ai dati strutturati (`openingHoursSpecification`, `priceRange`).
 
 ## Modificare l'illustrazione dell'intestazione
 

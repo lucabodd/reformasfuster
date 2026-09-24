@@ -1,0 +1,6 @@
+# Redirecciones 301 desde las direcciones de la web anterior (Cloudflare Pages y Netlify).
+# Si el hosting no aplica estas reglas (GitHub Pages, o Netlify cuando existe el archivo),
+# perfil.html, proyectos.html y contacto.html redirigen igualmente a su sección.
+/perfil      /#perfil      301
+/proyectos   /#proyectos   301
+/contacto    /#contacto    301

@@ -2,19 +2,20 @@
 #
 # - Cada texto lleva sus tres versiones juntas (clave.es / clave.va / clave.en).
 # - Se puede usar HTML: <em> (palabras en cursiva del titular), <strong>, &nbsp; (espacio que no se parte).
-# - No uses comillas dobles dentro de los textos: usa « » o “ ”.
+# - No uses comillas dobles dentro de los textos: usa « » o “ ”. En los enlaces, comillas simples:
+#   <a href='tel:+34620218734'>620&nbsp;218&nbsp;734</a> (el build las convierte en dobles).
 # - Las claves de [js] son mensajes que muestra el JavaScript; {name}, {p}, {total}… se sustituyen solos.
 #
 # Después de editar, regenera las páginas:  python3 tools/build.py
 
 [meta]
-title.es = "Construcciones y Reformas F2F · Alzira (Valencia) | Obra nueva y reformas integrales"
-title.va = "Construcciones y Reformas F2F · Alzira (València) | Obra nova i reformes integrals"
-title.en = "Construcciones y Reformas F2F · Alzira (Valencia) | New builds and renovations"
+title.es = "Empresa de reformas en Alzira (Valencia) | F2F Construcciones"
+title.va = "Empresa de reformes a Alzira (València) | F2F Construcciones"
+title.en = "Builders & renovations in Alzira, Valencia | F2F"
 
-description.es = "Empresa de construcción y reformas en Alzira (Valencia) con más de 30 años de experiencia. Arquitecto propio, gestión de licencias, visualización 3D y gremios propios. Presupuesto sin compromiso."
-description.va = "Empresa de construcció i reformes a Alzira (València) amb més de 30 anys d'experiència. Arquitecte propi, gestió de llicències, visualització 3D i gremis propis. Pressupost sense compromís."
-description.en = "Construction and renovation company in Alzira (Valencia) with over 30 years of experience. In-house architect, planning permits, 3D visualisation and our own trades. No-obligation quotes."
+description.es = "Reformas integrales y parciales, obra nueva, fachadas y ascensores a cota cero en Alzira y la Ribera. Más de 30 años de experiencia. Presupuesto sin compromiso."
+description.va = "Reformes integrals i parcials, obra nova, façanes i ascensors a cota zero a Alzira i la Ribera. Més de 30 anys d'experiència. Pressupost sense compromís."
+description.en = "Full and partial renovations, new builds, façades and step-free lifts in Alzira and the Valencia area. Over 30 years of experience. No-obligation quotes."
 
 og_title.es = "Construcciones y Reformas F2F · Alzira (Valencia)"
 og_title.va = "Construcciones y Reformas F2F · Alzira (València)"
@@ -23,6 +24,10 @@ og_title.en = "Construcciones y Reformas F2F · Alzira (Valencia)"
 og_description.es = "Obra nueva y reformas de principio a fin, con arquitecto propio y visualización previa en 3D. Más de 30 años de experiencia. Presupuesto sin compromiso."
 og_description.va = "Obra nova i reformes de principi a fi, amb arquitecte propi i visualització prèvia en 3D. Més de 30 anys d'experiència. Pressupost sense compromís."
 og_description.en = "New builds and renovations from start to finish, with an in-house architect and a 3D preview. Over 30 years of experience. No-obligation quotes."
+
+og_image_alt.es = "F2F Construcciones y Reformas: construimos y reformamos, de principio a fin. Alzira (Valencia)."
+og_image_alt.va = "F2F Construcciones y Reformas: construïm i reformem, de principi a fi. Alzira (València)."
+og_image_alt.en = "F2F Construcciones y Reformas: we build and renovate, from start to finish. Alzira, Valencia."
 
 jsonld_description.es = "Empresa de construcción y reformas en Alzira (Valencia) con más de 30 años de experiencia: obra nueva, reformas integrales y parciales, rehabilitación de fachadas y ascensores a cota cero, con arquitecto propio y visualización previa en 3D."
 jsonld_description.va = "Empresa de construcció i reformes a Alzira (València) amb més de 30 anys d'experiència: obra nova, reformes integrals i parcials, rehabilitació de façanes i ascensors a cota zero, amb arquitecte propi i visualització prèvia en 3D."
@@ -74,14 +79,18 @@ proyectos.es = "Proyectos"
 proyectos.va = "Projectes"
 proyectos.en = "Projects"
 
+preguntas.es = "Preguntas frecuentes"
+preguntas.va = "Preguntes freqüents"
+preguntas.en = "FAQ"
+
 contacto.es = "Contacto"
 contacto.va = "Contacte"
 contacto.en = "Contact"
 
 [hero]
-eyebrow.es = "Construcción y reformas&nbsp;· Alzira&nbsp;/&nbsp;Valencia"
-eyebrow.va = "Construcció i reformes&nbsp;· Alzira&nbsp;/&nbsp;València"
-eyebrow.en = "Construction &amp; renovation&nbsp;· Alzira&nbsp;/&nbsp;Valencia"
+eyebrow.es = "Empresa de reformas y construcción en Alzira&nbsp;(Valencia)"
+eyebrow.va = "Empresa de reformes i construcció a Alzira&nbsp;(València)"
+eyebrow.en = "Building &amp; renovation company in Alzira,&nbsp;Valencia"
 
 title.es = "Construimos y reformamos, <em>de principio a fin.</em>"
 title.va = "Construïm i reformem, <em>de principi a fi.</em>"
@@ -194,9 +203,9 @@ title.es = "Todo lo que necesita tu obra, <em>en un solo equipo.</em>"
 title.va = "Tot el que necessita la teua obra, <em>en un sol equip.</em>"
 title.en = "All your project needs, <em>in one team.</em>"
 
-lead.es = "F2F cuenta con el equipo necesario para realizar cualquier obra: arquitecto, constructor y operarios propios. Así controlamos cada fase, del proyecto a los acabados."
-lead.va = "F2F compta amb l'equip necessari per a fer qualsevol obra: arquitecte, constructor i operaris propis. Així controlem cada fase, del projecte als acabats."
-lead.en = "F2F has the team to carry out any kind of building work: an architect, a builder and our own workers. That's how we keep every stage under control, from design to finishes."
+lead.es = "F2F cuenta con el equipo necesario para realizar cualquier obra: arquitecto, constructor y operarios propios. Así controlamos cada fase, del proyecto a los acabados. Trabajamos en Alzira, la Ribera y el resto de la provincia de Valencia."
+lead.va = "F2F compta amb l'equip necessari per a fer qualsevol obra: arquitecte, constructor i operaris propis. Així controlem cada fase, del projecte als acabats. Treballem a Alzira, la Ribera i la resta de la província de València."
+lead.en = "F2F has the team to carry out any kind of building work: an architect, a builder and our own workers. That's how we keep every stage under control, from design to finishes. We work in Alzira, the Ribera area and across the province of Valencia."
 
 s1_title.es = "Obra nueva"
 s1_title.va = "Obra nova"
@@ -460,9 +469,9 @@ zone_label.es = "Zona de trabajo"
 zone_label.va = "Zona de treball"
 zone_label.en = "Service area"
 
-zone_value.es = "Alzira y provincia de Valencia"
-zone_value.va = "Alzira i província de València"
-zone_value.en = "Alzira and the province of Valencia"
+zone_value.es = "Alzira, la Ribera y provincia de Valencia"
+zone_value.va = "Alzira, la Ribera i província de València"
+zone_value.en = "Alzira, the Ribera area and the province of Valencia"
 
 form_title.es = "Cuéntanos tu proyecto"
 form_title.va = "Conta'ns el teu projecte"
@@ -547,6 +556,69 @@ address.en = "C/ Matilde Malo, 4 · 46792 La Barraca d'Aigües Vives, Alzira (Va
 top.es = "Volver arriba"
 top.va = "Torna amunt"
 top.en = "Back to top"
+
+# Preguntas frecuentes: solo datos que ya da la web (y una explicación general de la cota cero)
+[faq]
+eyebrow.es = "Preguntas frecuentes"
+eyebrow.va = "Preguntes freqüents"
+eyebrow.en = "FAQ"
+
+title.es = "Resolvemos <em>tus dudas.</em>"
+title.va = "Resolem <em>els teus dubtes.</em>"
+title.en = "Your questions, <em>answered.</em>"
+
+lead.es = "¿Tienes otra pregunta? Llámanos o escríbenos por WhatsApp y te respondemos."
+lead.va = "Tens una altra pregunta? Telefona'ns o escriu-nos per WhatsApp i et responem."
+lead.en = "Got another question? Call us or message us on WhatsApp and we'll get back to you."
+
+q1.es = "¿Cómo pido presupuesto?"
+q1.va = "Com demane pressupost?"
+q1.en = "How do I request a quote?"
+a1.es = "Llámanos o escríbenos por WhatsApp al <a href='tel:+34620218734'>620&nbsp;218&nbsp;734</a> o al <a href='tel:+34609648785'>609&nbsp;648&nbsp;785</a>, o envíanos un email a <a href='mailto:construccionesf2f@gmail.com'>construccionesf2f@gmail.com</a> contándonos qué obra quieres hacer. Te preparamos un presupuesto sin compromiso."
+a1.va = "Telefona'ns o escriu-nos per WhatsApp al <a href='tel:+34620218734'>620&nbsp;218&nbsp;734</a> o al <a href='tel:+34609648785'>609&nbsp;648&nbsp;785</a>, o envia'ns un correu a <a href='mailto:construccionesf2f@gmail.com'>construccionesf2f@gmail.com</a> contant-nos quina obra vols fer. Et preparem un pressupost sense compromís."
+a1.en = "Call us or message us on WhatsApp on <a href='tel:+34620218734'>620&nbsp;218&nbsp;734</a> or <a href='tel:+34609648785'>609&nbsp;648&nbsp;785</a>, or email us at <a href='mailto:construccionesf2f@gmail.com'>construccionesf2f@gmail.com</a> telling us about the work you have in mind. We'll prepare a no-obligation quote."
+
+q2.es = "¿En qué zonas trabajáis?"
+q2.va = "En quines zones treballeu?"
+q2.en = "Which areas do you cover?"
+a2.es = "Estamos en La Barraca d'Aigües Vives (Alzira) y trabajamos en Alzira, la Ribera y el resto de la provincia de Valencia. Hemos realizado obras en localidades como Alzira, Carcaixent y Canals."
+a2.va = "Som a la Barraca d'Aigües Vives (Alzira) i treballem a Alzira, la Ribera i la resta de la província de València. Hem fet obres en localitats com Alzira, Carcaixent i Canals."
+a2.en = "We are based in La Barraca d'Aigües Vives (Alzira) and work in Alzira, the Ribera area and the rest of the province of Valencia. We have carried out projects in towns such as Alzira, Carcaixent and Canals."
+
+q3.es = "¿Os encargáis de las licencias de obra?"
+q3.va = "Us encarregueu de les llicències d'obra?"
+q3.en = "Do you take care of building permits?"
+a3.es = "Sí. Nos encargamos tanto del diseño y la gestión de licencias como de la ejecución completa de la obra, para que no tengas que preocuparte del papeleo."
+a3.va = "Sí. Ens encarreguem tant del disseny i la gestió de llicències com de l'execució completa de l'obra, perquè no hages de preocupar-te de la paperassa."
+a3.en = "Yes. We handle the design and the licence applications as well as the complete execution of the work, so you don't have to worry about the paperwork."
+
+q4.es = "¿Puedo ver cómo quedará la obra antes de empezar?"
+q4.va = "Puc veure com quedarà l'obra abans de començar?"
+q4.en = "Can I see what the result will look like before work starts?"
+a4.es = "Sí. Nuestro arquitecto desarrolla el proyecto y te lo mostramos con una visualización previa en 3D. Después supervisamos los acabados para que queden a tu gusto."
+a4.va = "Sí. El nostre arquitecte desenvolupa el projecte i te'l mostrem amb una visualització prèvia en 3D. Després supervisem els acabats perquè queden al teu gust."
+a4.en = "Yes. Our architect develops the project and we show it to you as a 3D visualisation before we start. Then we supervise the finishes so they turn out exactly as you want."
+
+q5.es = "¿Qué es bajar un ascensor a cota cero?"
+q5.va = "Què és baixar un ascensor a cota zero?"
+q5.en = "What does bringing a lift down to ground level (cota cero) mean?"
+a5.es = "Es adaptar el ascensor de un edificio para que llegue hasta el nivel de la calle (cota 0), de modo que ya no haya que subir escalones para llegar a él. Es una de las obras más habituales para eliminar barreras arquitectónicas en comunidades de vecinos, y en F2F tenemos experiencia en este tipo de trabajos."
+a5.va = "És adaptar l'ascensor d'un edifici perquè arribe fins al nivell del carrer (cota 0), de manera que ja no calga pujar escales per a arribar-hi. És una de les obres més habituals per a eliminar barreres arquitectòniques en comunitats de veïns, i a F2F tenim experiència en este tipus de treballs."
+a5.en = "It means adapting a building's lift so that it reaches street level (level 0), so residents no longer have to climb steps to get to it. It is one of the most common ways of removing architectural barriers in residential buildings, and at F2F we have experience in this kind of work."
+
+q6.es = "¿Hacéis también obra nueva?"
+q6.va = "També feu obra nova?"
+q6.en = "Do you also build new homes?"
+a6.es = "Sí. Además de reformas integrales y parciales, construimos viviendas, locales comerciales y otros espacios, con el proyecto de nuestro propio arquitecto."
+a6.va = "Sí. A més de reformes integrals i parcials, construïm habitatges, locals comercials i altres espais, amb el projecte del nostre propi arquitecte."
+a6.en = "Yes. As well as full and partial renovations, we build homes, commercial premises and other spaces, designed by our own architect."
+
+q7.es = "¿Quién realiza los trabajos?"
+q7.va = "Qui fa els treballs?"
+q7.en = "Who carries out the work?"
+a7.es = "Nuestro propio equipo: arquitecto, constructor y operarios propios. Coordinamos todos los gremios de la obra de principio a fin y hacemos que se cumplan los plazos."
+a7.va = "El nostre propi equip: arquitecte, constructor i operaris propis. Coordinem tots els gremis de l'obra de principi a fi i fem que es complisquen els terminis."
+a7.en = "Our own team: an architect, a builder and our own workers. We coordinate every trade from start to finish and make sure deadlines are met."
 
 # Enlaces de WhatsApp: mensaje con el que se abre la conversación
 [wa]

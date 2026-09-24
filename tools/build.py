@@ -12,12 +12,13 @@ Sintaxis de la plantilla:
   {{ clave }}           texto de src/i18n.toml en el idioma de la página (puede llevar HTML)
   {{ clave | attr }}    el mismo texto, escapado para ir dentro de un atributo
   {{ clave | url }}     codificado para una URL (enlaces de WhatsApp)
-  {{ clave | json }}    como cadena JSON (datos estructurados)
+  {{ clave | json }}    como cadena JSON sin etiquetas HTML (datos estructurados)
   {{ page.xxx }}        valores que calcula este script (idioma, rutas, enlaces entre idiomas…)
   {{> archivo }}        inserta src/partials/archivo
 
 Requiere Python 3.11 o superior (o el paquete tomli en versiones anteriores).
 """
+import hashlib
 import html
 import json
 import pathlib
@@ -46,6 +47,16 @@ LANGS = {
 DEFAULT = next(iter(LANGS))
 
 TAG = re.compile(r"\{\{\s*(>)?\s*([\w.\-/]+)\s*(?:\|\s*(\w+)\s*)?\}\}")
+HTML_TAG = re.compile(r"<[^>]+>")
+JSON_LD = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
+
+# Límites orientativos de lo que Google muestra sin cortar en los resultados de búsqueda
+MAX_TITLE = 62
+MAX_DESCRIPTION = 160
+
+# Hojas de estilo y scripts: se enlazan con ?v=<huella del contenido> para que los navegadores
+# puedan guardarlos en caché mucho tiempo y aun así reciban la versión nueva tras cada cambio.
+VERSIONED_ASSETS = {"css": "assets/css/styles.css", "js": "assets/js/main.js"}
 GENERATED_NOTE = "<!-- Generado por tools/build.py a partir de src/index.html y src/i18n.toml: no editar a mano. -->"
 
 
@@ -92,15 +103,28 @@ def expand_partials(text, depth=0):
     return TAG.sub(replace, text)
 
 
+def plain_text(value):
+    return re.sub(r"\s+", " ", html.unescape(HTML_TAG.sub("", value))).strip()
+
+
+def versioned(path):
+    digest = hashlib.sha1((ROOT / path).read_bytes()).hexdigest()[:10]
+    return f"{path}?v={digest}"
+
+
+SINGLE_QUOTED_ATTR = re.compile(r"(\s[\w:-]+)='([^'\"<>]*)'")
+
+
 def apply_filter(value, name, key):
     if name is None:
-        return value
+        # en i18n.toml los atributos de los enlaces van entre comillas simples; en la página, dobles
+        return SINGLE_QUOTED_ATTR.sub(r'\1="\2"', value)
     if name == "attr":
         return html.escape(html.unescape(value), quote=True)
     if name == "url":
         return urllib.parse.quote(html.unescape(value), safe="")
     if name == "json":
-        return json.dumps(html.unescape(value), ensure_ascii=False)
+        return json.dumps(plain_text(value), ensure_ascii=False)
     raise BuildError(f"Filtro desconocido «{name}» en {{{{ {key} }}}}")
 
 
@@ -134,6 +158,7 @@ def page_vars(code, strings):
         "lang_links_short": lang_links(code, root, compact=True),
         "lang_links_full": lang_links(code, root, compact=False),
         "js_strings": json.dumps(js_strings, ensure_ascii=False).replace("</", "<\\/"),
+        **{name: versioned(path) for name, path in VERSIONED_ASSETS.items()},
         "generated_note": GENERATED_NOTE,
     }
 
@@ -158,7 +183,22 @@ def render(template, code, strings, used):
     if leftover:
         line = out.count("\n", 0, leftover.start()) + 1
         raise BuildError(f"[{code}] Queda una llave sin sustituir en la línea {line}")
+    for block in JSON_LD.findall(out):
+        try:
+            json.loads(block)
+        except json.JSONDecodeError as err:
+            raise BuildError(f"[{code}] Los datos estructurados (JSON-LD) no son JSON válido: {err}") from None
     return out
+
+
+def seo_warnings(strings):
+    warnings = []
+    for key, limit in (("meta.title", MAX_TITLE), ("meta.description", MAX_DESCRIPTION)):
+        for code, value in strings.get(key, {}).items():
+            length = len(plain_text(value))
+            if length > limit:
+                warnings.append(f"{key}.{code} tiene {length} caracteres (Google suele cortar a partir de ~{limit})")
+    return warnings
 
 
 def sitemap():
@@ -192,6 +232,8 @@ def main():
     unused = sorted(key for key in strings if key not in used and not key.startswith("js."))
     if unused:
         print("Aviso: textos de src/i18n.toml que la plantilla no usa: " + ", ".join(unused))
+    for warning in seo_warnings(strings):
+        print("Aviso SEO: " + warning)
 
 
 if __name__ == "__main__":

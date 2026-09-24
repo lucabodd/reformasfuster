@@ -270,13 +270,25 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .header__inner { display: flex; align-items: center; gap: 1.5rem; height: var(--header-h); }
 
-.brand { display: inline-flex; align-items: center; gap: .7rem; margin-right: auto; color: var(--ink); text-decoration: none; }
-.brand__mark { width: 40px; height: 40px; flex: none; }
-.brand__text { display: flex; flex-direction: column; line-height: 1; }
-.brand__name { font-size: 1.3rem; font-weight: 800; font-stretch: 125%; letter-spacing: -.01em; }
-.brand__tag { margin-top: .3rem; font-size: .68rem; font-weight: 580; font-stretch: 105%; letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; color: var(--ink-soft); }
+.brand { display: inline-flex; align-items: center; gap: .8rem; margin-right: auto; color: var(--ink); text-decoration: none; }
+.brand__logo { display: block; flex: none; width: auto; height: 31px; }
+.brand__f { fill: currentColor; }
+.brand__two { fill: var(--accent); }
+.brand__tag {
+  padding-left: .8rem;
+  border-left: 1.5px solid var(--line-strong);
+  font-size: .62rem;
+  font-weight: 640;
+  font-stretch: 108%;
+  line-height: 1.3;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-soft);
+}
 .brand--light { color: var(--on-dark); }
-.brand--light .brand__tag { color: var(--on-dark-soft); }
+.brand--light .brand__two { fill: var(--accent-light); }
+.brand--light .brand__tag { border-color: var(--line-dark); color: var(--on-dark-soft); }
 
 .nav__list { display: flex; gap: .15rem; }
 .nav__list a {
@@ -440,6 +452,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   letter-spacing: -.035em;
 }
 .hero__title em { display: block; margin-top: .06em; font-size: 1.06em; letter-spacing: -.01em; }
+.hero__kicker { display: flex; margin-bottom: 1.4rem; line-height: 1.4; text-wrap: pretty; }
 
 .hero__lead { max-width: 35em; margin-bottom: 2rem; font-size: clamp(1.08rem, 1rem + .35vw, 1.22rem); color: var(--ink-soft); }
 .hero__cta { display: flex; flex-wrap: wrap; gap: .8rem; }
@@ -450,7 +463,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 @media (max-width: 399px) {
-  .brand__tag { font-size: .6rem; letter-spacing: .05em; }
+  .brand__logo { height: 27px; }
+  .brand__tag { font-size: .58rem; letter-spacing: .08em; }
   .hero__cta .btn--primary .icon { display: none; }
 }
 
@@ -865,6 +879,48 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .drawing .d-cota text { fill: currentColor; font-size: 11px; font-weight: 620; letter-spacing: .06em; }
 .drawing .d-label { fill: rgba(245, 240, 232, .5); font-size: 10.5px; font-weight: 620; letter-spacing: .16em; }
 .drawing .d-accent-text { fill: var(--accent-light); }
+
+/* ---------------------------------------------------------------- preguntas frecuentes */
+
+.faq { background: var(--paper-2); }
+.faq__grid { display: grid; gap: 2.5rem; }
+.faq__intro h2 { margin-bottom: 1.1rem; font-size: clamp(2.15rem, 1.3rem + 3vw, 3.6rem); }
+.faq__lead { max-width: 30em; margin-bottom: 1.8rem; font-size: 1.1rem; color: var(--ink-soft); }
+.faq__list { border-top: 1px solid var(--line-strong); }
+.faq__item { border-bottom: 1px solid var(--line-strong); }
+.faq__item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.3rem 0;
+  font-size: 1.1rem;
+  font-weight: 660;
+  font-stretch: 104%;
+  line-height: 1.35;
+  list-style: none;
+  cursor: pointer;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary:focus-visible { outline-offset: 4px; }
+.faq__icon {
+  width: 34px;
+  height: 34px;
+  padding: 7px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 50%;
+  transition: transform .3s var(--ease), background-color .2s, color .2s, border-color .2s;
+}
+.faq__item summary:hover .faq__icon { border-color: var(--ink); }
+.faq__item[open] .faq__icon { transform: rotate(45deg); border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.faq__answer { padding: 0 3.25rem 1.5rem 0; color: var(--ink-soft); }
+.faq__answer p { margin: 0; }
+.faq__answer a { font-weight: 620; color: var(--accent-strong); }
+
+@media (min-width: 980px) {
+  .faq__grid { grid-template-columns: .85fr 1.15fr; gap: clamp(3rem, 6vw, 6rem); align-items: start; }
+  .faq__intro { position: sticky; top: calc(var(--header-h) + 2rem); }
+}
 
 /* ---------------------------------------------------------------- llamada a la acción */
 

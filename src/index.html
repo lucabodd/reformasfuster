@@ -6,9 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ meta.title | attr }}</title>
   <meta name="description" content="{{ meta.description | attr }}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="{{ page.url }}">
 {{ page.alternates }}
   <meta name="theme-color" content="#f5f0e8">
+  <meta name="geo.region" content="ES-V">
+  <meta name="geo.placename" content="Alzira">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="{{ page.og_locale }}">
@@ -18,44 +21,112 @@
   <meta property="og:description" content="{{ meta.og_description | attr }}">
   <meta property="og:url" content="{{ page.url }}">
   <meta property="og:image" content="{{ page.og_image }}">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ meta.og_image_alt | attr }}">
   <meta name="twitter:card" content="summary_large_image">
 
+  <link rel="icon" href="{{ page.root }}favicon.ico" sizes="32x32">
   <link rel="icon" href="{{ page.root }}favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="{{ page.root }}assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="{{ page.root }}manifest.webmanifest">
   <link rel="preload" href="{{ page.root }}assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ page.root }}assets/css/styles.css">
+  <link rel="preload" href="{{ page.root }}assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ page.root }}{{ page.css }}">
   <script>document.documentElement.classList.add('js')</script>
-  <script src="{{ page.root }}assets/js/main.js" defer></script>
+  <script src="{{ page.root }}{{ page.js }}" defer></script>
   <script type="application/json" id="i18n">{{ page.js_strings }}</script>
 
+  <!-- Datos estructurados (schema.org): empresa, servicios, web, página y preguntas frecuentes -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "GeneralContractor",
-    "name": "Construcciones y Reformas F2F",
-    "alternateName": "construccionesf2f",
-    "description": {{ meta.jsonld_description | json }},
-    "url": "https://www.f2fconstruccionesyreformas.com/",
-    "image": "{{ page.og_image }}",
-    "logo": "https://www.f2fconstruccionesyreformas.com/assets/img/apple-touch-icon.png",
-    "email": "construccionesf2f@gmail.com",
-    "telephone": "+34 620 218 734",
-    "contactPoint": [
-      { "@type": "ContactPoint", "telephone": "+34 620 218 734", "contactType": "customer service", "availableLanguage": ["es", "ca"] },
-      { "@type": "ContactPoint", "telephone": "+34 609 648 785", "contactType": "customer service", "availableLanguage": ["es", "ca"] }
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "C/ Matilde Malo, 4",
-      "postalCode": "46792",
-      "addressLocality": "La Barraca d'Aigües Vives, Alzira",
-      "addressRegion": "Valencia",
-      "addressCountry": "ES"
-    },
-    "areaServed": ["Alzira", "Carcaixent", "Canals", "Provincia de Valencia"],
-    "knowsAbout": ["Obra nueva", "Reformas integrales", "Reformas parciales", "Rehabilitación de fachadas", "Ascensores a cota cero", "Eliminación de barreras arquitectónicas", "Interiorismo", "Gestión de licencias de obra", "Albañilería"]
+    "@graph": [
+      {
+        "@type": "GeneralContractor",
+        "@id": "https://www.f2fconstruccionesyreformas.com/#empresa",
+        "name": "Construcciones y Reformas F2F",
+        "alternateName": ["F2F Construcciones y Reformas", "construccionesf2f"],
+        "description": {{ meta.jsonld_description | json }},
+        "slogan": {{ hero.title | json }},
+        "url": "https://www.f2fconstruccionesyreformas.com/",
+        "logo": { "@type": "ImageObject", "url": "https://www.f2fconstruccionesyreformas.com/assets/img/icon-512.png", "width": 512, "height": 512 },
+        "image": "{{ page.og_image }}",
+        "email": "construccionesf2f@gmail.com",
+        "telephone": "+34 620 218 734",
+        "contactPoint": [
+          { "@type": "ContactPoint", "telephone": "+34 620 218 734", "contactType": "customer service", "availableLanguage": ["es", "ca"] },
+          { "@type": "ContactPoint", "telephone": "+34 609 648 785", "contactType": "customer service", "availableLanguage": ["es", "ca"] }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "C/ Matilde Malo, 4",
+          "postalCode": "46792",
+          "addressLocality": "La Barraca d'Aigües Vives, Alzira",
+          "addressRegion": "Valencia",
+          "addressCountry": "ES"
+        },
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=C%2F%20Matilde%20Malo%204%2C%2046792%20La%20Barraca%20d%27Aig%C3%BCes%20Vives%2C%20Alzira%2C%20Valencia",
+        "areaServed": [
+          { "@type": "City", "name": "Alzira" },
+          { "@type": "City", "name": "Carcaixent" },
+          { "@type": "City", "name": "Canals" },
+          { "@type": "AdministrativeArea", "name": "Ribera Alta" },
+          { "@type": "AdministrativeArea", "name": "Provincia de Valencia" }
+        ],
+        "knowsAbout": [{{ ticker.t1 | json }}, {{ ticker.t2 | json }}, {{ ticker.t3 | json }}, {{ ticker.t4 | json }}, {{ ticker.t5 | json }}, {{ ticker.t6 | json }}, {{ ticker.t7 | json }}, {{ ticker.t8 | json }}, {{ ticker.t9 | json }}],
+        "sameAs": ["https://www.paginasamarillas.es/f/la-barraca-d-aigues-vives/construcciones-y-reformas-f2f_220996193_000000001.html"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": {{ servicios.eyebrow | json }},
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ servicios.s1_title | json }}, "description": {{ servicios.s1_text | json }}, "provider": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ servicios.s2_title | json }}, "description": {{ servicios.s2_text | json }}, "provider": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ servicios.s3_title | json }}, "description": {{ servicios.s3_text | json }}, "provider": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ servicios.s4_title | json }}, "description": {{ servicios.s4_text | json }}, "provider": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ servicios.s5_title | json }}, "description": {{ servicios.s5_text | json }}, "provider": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ servicios.s6_title | json }}, "description": {{ servicios.s6_text | json }}, "provider": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ servicios.s7_title | json }}, "description": {{ servicios.s7_text | json }}, "provider": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ servicios.s8_title | json }}, "description": {{ servicios.s8_text | json }}, "provider": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" } } }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.f2fconstruccionesyreformas.com/#web",
+        "url": "https://www.f2fconstruccionesyreformas.com/",
+        "name": "Construcciones y Reformas F2F",
+        "inLanguage": ["es", "ca-valencia", "en"],
+        "publisher": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "{{ page.url }}#webpage",
+        "url": "{{ page.url }}",
+        "name": {{ meta.title | json }},
+        "description": {{ meta.description | json }},
+        "inLanguage": "{{ page.lang }}",
+        "isPartOf": { "@id": "https://www.f2fconstruccionesyreformas.com/#web" },
+        "about": { "@id": "https://www.f2fconstruccionesyreformas.com/#empresa" },
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "{{ page.og_image }}" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "{{ page.url }}#preguntas",
+        "inLanguage": "{{ page.lang }}",
+        "isPartOf": { "@id": "{{ page.url }}#webpage" },
+        "mainEntity": [
+          { "@type": "Question", "name": {{ faq.q1 | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a1 | json }} } },
+          { "@type": "Question", "name": {{ faq.q2 | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a2 | json }} } },
+          { "@type": "Question", "name": {{ faq.q3 | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a3 | json }} } },
+          { "@type": "Question", "name": {{ faq.q4 | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a4 | json }} } },
+          { "@type": "Question", "name": {{ faq.q5 | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a5 | json }} } },
+          { "@type": "Question", "name": {{ faq.q6 | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a6 | json }} } },
+          { "@type": "Question", "name": {{ faq.q7 | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a7 | json }} } }
+        ]
+      }
+    ]
   }
   </script>
 </head>
@@ -68,15 +139,8 @@
   <header class="site-header" data-header>
     <div class="container header__inner">
       <a class="brand" href="#inicio" aria-label="{{ ui.brand_home | attr }}">
-        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
-          <rect width="40" height="40" rx="10" fill="#b64a26"/>
-          <path d="M9 19.5 20 11l11 8.5M12.5 17v12h15V17" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
-          <path d="M9.5 33h21M9.5 31v4M30.5 31v4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-        </svg>
-        <span class="brand__text">
-          <span class="brand__name">F2F</span>
-          <span class="brand__tag">Construcciones y Reformas</span>
-        </span>
+        {{> logo-wordmark.svg }}
+        <span class="brand__tag">Construcciones<br>y Reformas</span>
       </a>
 
       <nav class="nav" id="menu" aria-label="{{ ui.nav_label | attr }}">
@@ -126,8 +190,10 @@
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="container hero__grid">
         <div class="hero__copy">
-          <p class="eyebrow" data-reveal>{{ hero.eyebrow }}</p>
-          <h1 class="hero__title" id="hero-title" data-reveal>{{ hero.title }}</h1>
+          <h1 class="hero__title" id="hero-title" data-reveal>
+            <span class="eyebrow hero__kicker">{{ hero.eyebrow }}</span>
+            {{ hero.title }}
+          </h1>
           <p class="hero__lead" data-reveal>{{ hero.lead }}</p>
           <div class="hero__cta" data-reveal>
             <a class="btn btn--primary btn--lg" href="#contacto">
@@ -400,6 +466,51 @@
       </div>
     </section>
 
+    <!-- ============================== PREGUNTAS FRECUENTES -->
+    <section class="section faq" id="preguntas" aria-labelledby="preguntas-title">
+      <div class="container faq__grid">
+        <div class="faq__intro">
+          <p class="eyebrow" data-reveal>{{ faq.eyebrow }}</p>
+          <h2 id="preguntas-title" data-reveal>{{ faq.title }}</h2>
+          <p class="faq__lead" data-reveal>{{ faq.lead }}</p>
+          <a class="btn btn--ghost" href="https://wa.me/34620218734?text={{ wa.text | url }}" target="_blank" rel="noopener" data-reveal>
+            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            {{ cta.whatsapp }}
+          </a>
+        </div>
+        <div class="faq__list" data-reveal>
+          <details class="faq__item" open>
+            <summary>{{ faq.q1 }}<svg class="icon faq__icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__answer"><p>{{ faq.a1 }}</p></div>
+          </details>
+          <details class="faq__item">
+            <summary>{{ faq.q2 }}<svg class="icon faq__icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__answer"><p>{{ faq.a2 }}</p></div>
+          </details>
+          <details class="faq__item">
+            <summary>{{ faq.q3 }}<svg class="icon faq__icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__answer"><p>{{ faq.a3 }}</p></div>
+          </details>
+          <details class="faq__item">
+            <summary>{{ faq.q4 }}<svg class="icon faq__icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__answer"><p>{{ faq.a4 }}</p></div>
+          </details>
+          <details class="faq__item">
+            <summary>{{ faq.q5 }}<svg class="icon faq__icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__answer"><p>{{ faq.a5 }}</p></div>
+          </details>
+          <details class="faq__item">
+            <summary>{{ faq.q6 }}<svg class="icon faq__icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__answer"><p>{{ faq.a6 }}</p></div>
+          </details>
+          <details class="faq__item">
+            <summary>{{ faq.q7 }}<svg class="icon faq__icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__answer"><p>{{ faq.a7 }}</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <!-- ============================== CTA -->
     <section class="cta-band" aria-labelledby="cta-title">
       <div class="container cta-band__inner">
@@ -520,15 +631,8 @@
     <div class="container footer__grid">
       <div class="footer__brand">
         <a class="brand brand--light" href="#inicio" aria-label="{{ ui.brand_home | attr }}">
-          <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
-            <rect width="40" height="40" rx="10" fill="#b64a26"/>
-            <path d="M9 19.5 20 11l11 8.5M12.5 17v12h15V17" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
-            <path d="M9.5 33h21M9.5 31v4M30.5 31v4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-          </svg>
-          <span class="brand__text">
-            <span class="brand__name">F2F</span>
-            <span class="brand__tag">Construcciones y Reformas</span>
-          </span>
+          {{> logo-wordmark.svg }}
+          <span class="brand__tag">Construcciones<br>y Reformas</span>
         </a>
         <p>{{ footer.about }}</p>
       </div>
@@ -540,6 +644,7 @@
           <li><a href="#metodo">{{ nav.metodo }}</a></li>
           <li><a href="#perfil">{{ nav.perfil }}</a></li>
           <li><a href="#proyectos">{{ nav.proyectos }}</a></li>
+          <li><a href="#preguntas">{{ nav.preguntas }}</a></li>
           <li><a href="#contacto">{{ nav.contacto }}</a></li>
         </ul>
       </nav>

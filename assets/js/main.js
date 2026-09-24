@@ -54,7 +54,7 @@
 
   /* ------------------------------------------------------------ enlace activo del menú */
   const navLinks = $$('.nav__list a[href^="#"]');
-  const spyTargets = ['#inicio', ...navLinks.map((a) => a.getAttribute('href'))].map((id) => $(id)).filter(Boolean);
+  const spyTargets = $$('main section[id]');
   let currentSection = '';
   if ('IntersectionObserver' in window && spyTargets.length) {
     const spy = new IntersectionObserver((entries) => {
