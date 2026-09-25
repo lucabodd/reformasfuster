@@ -15,10 +15,11 @@ Nuovo sito di [f2fconstruccionesyreformas.com](https://www.f2fconstruccionesyref
 ```
 src/index.html          MODELLO della pagina (struttura, con i testi sostituiti da {{ chiavi }})
 src/i18n.toml           TUTTI I TESTI, nelle tre lingue una accanto all'altra
-src/partials/           pezzi inseriti nel modello: icone, illustrazione, disegni dei progetti
+src/partials/           pezzi inseriti nel modello: icone, illustrazione, logo
 tools/build.py          genera le pagine delle tre lingue a partire da src/
 tools/hero.py           rigenera l'illustrazione isometrica dell'intestazione
 tools/logo.py           rigenera il logo (SVG) dalle font del marchio
+tools/fotos.py          prepara le foto dei progetti (riduce, ottimizza, toglie i dati GPS)
 
 index.html              ┐
 va/index.html           ├ GENERATI da tools/build.py: non modificarli a mano
@@ -62,18 +63,20 @@ python3 -m http.server 8080
 
 ## Cose da completare prima di andare online
 
-1. **Foto dei progetti.** Le quattro schede (Fachada Alzira, Reforma parcial Carcaixent, Reforma integral Carcaixent, Ascensor cota 0 Canals) per ora mostrano un disegno tecnico. Per metterci le foto vere:
-   - carica le immagini in `assets/img/proyectos/` (JPG, lato lungo circa 1600–2000 px, massimo circa 400 KB ciascuna);
-   - in `src/index.html` riempi l'attributo `data-gallery` della scheda, con i percorsi separati da virgole. I percorsi partono dalla radice del sito e valgono per tutte e tre le lingue. La prima foto fa da copertina:
-     ```html
-     <article class="project project--wide" data-reveal
-              data-gallery="assets/img/proyectos/fachada-alzira-1.jpg, assets/img/proyectos/fachada-alzira-2.jpg">
-     ```
-   - esegui `python3 tools/build.py`. Il sito mostra da solo la copertina, il pulsante "Ver fotos (N)" e la galleria a schermo intero.
+1. **Titoli dei progetti.** Le foto sono quelle del sito attuale (le 7 gallerie della pagina Proyectos, 23 foto), ottimizzate e senza metadati. I titoli sul vecchio sito erano generici ("Reforma parcial – Carcaixent" ×3), quindi ogni scheda ha ora un titolo che descrive ciò che si vede nelle foto ("Cocina, baño y buhardilla", "Cocina abierta con isla"…): conviene che il titolare li controlli (sono in `src/i18n.toml`, sezione `[proyectos]`). Le immagini di "Proyecto de reforma integral" sono infografie 3D, non foto di un lavoro finito, e il sito le presenta come tali.
 2. **Rilettura delle traduzioni.** Il valenciano segue la norma AVL (*teua*, *estes*, *complisquen*…) e l'inglese usa l'ortografia britannica (molti residenti britannici nella Comunitat Valenciana). Conviene comunque che le faccia rileggere un madrelingua, soprattutto per il lessico del settore.
 3. **Logo.** Il nuovo logo (vedi sotto) è una proposta: se all'azienda piace, è pronto; se invece ha già un logo suo e vuole tenerlo, va sostituito nei file elencati nella sezione "Logo".
-4. **Testi.** Sono presi dal sito attuale e riorganizzati. È meglio che il titolare li rilegga, soprattutto la sezione "Cómo trabajamos", che mette in fila come processo cose che sul vecchio sito erano sparse.
+4. **Testi.** Sono presi dal sito attuale e riorganizzati. È meglio che il titolare li rilegga, soprattutto la sezione "Cómo trabajamos", che mette in fila come processo cose che sul vecchio sito erano sparse. **Da confermare: "más de 30 años de experiencia".** Il dato non compare sul sito attuale né su infoisinfo; se non è esatto va corretto in `src/i18n.toml` (descrizioni `meta`, `facts.f1_*`, `perfil.years_hidden`, `footer.about`), nel numero "30+" di `src/index.html` e nelle immagini `og-image*.jpg`.
 5. **Aviso legal / privacidad.** In Spagna (LSSI) un sito aziendale deve avere un avviso legale con ragione sociale, NIF e indirizzo. Serve che l'azienda fornisca questi dati.
+
+## Foto dei progetti
+
+Ogni progetto è una scheda in `src/index.html` (`<article data-project="…" data-gallery="…">`) con etichetta, luogo e titolo in `src/i18n.toml`. Per cambiare le foto di un progetto, o aggiungerne uno:
+
+1. metti gli originali (così come escono dal telefono) in `fotos/<data-project>/`, ad esempio `fotos/cocina-isla-carcaixent/`. L'ordine è quello alfabetico dei file e la prima è la copertina: per sceglierla basta chiamarla `01-portada.jpg`. La cartella `fotos/` non va nel repository;
+2. esegui `python3 tools/fotos.py && python3 tools/build.py` (serve `pip install pillow`, e `pillow-heif` per le foto `.heic` dell'iPhone).
+
+`fotos.py` raddrizza le foto, converte il colore in sRGB, le riduce a 1600 px e **elimina tutti i metadati, compresa la posizione GPS**, che nelle foto di case di clienti è un dato sensibile. Le salva in `assets/img/proyectos/` (più una versione da 800 px della copertina per i telefoni) e compila da solo il `data-gallery` della scheda. `build.py` mette poi la copertina nell'HTML con testo alternativo nelle tre lingue ("Cocina y baño en Carcaixent"), dimensioni e `srcset`, controlla che tutte le foto esistano e le aggiunge alla `sitemap.xml`. Il resto lo fa il JavaScript: pulsante "Ver fotos (N)" e galleria a schermo intero. Per un progetto nuovo si copia una scheda in `src/index.html`, si cambia `data-project` e si aggiungono i suoi testi in `i18n.toml`; con `data-kind="render"` la scheda dice "infografías" invece di "fotos".
 
 ## Modulo di contatto
 
@@ -112,6 +115,7 @@ Per rigenerare gli SVG: `pip install fonttools brotli`, poi `python3 tools/logo.
 - Dati strutturati schema.org in un unico grafo: `GeneralContractor` (indirizzo, telefoni, mappa, zona servita, catalogo degli 8 servizi), `WebSite`, `WebPage` e `FAQPage`, nella lingua di ogni pagina. Il build verifica che il JSON-LD sia valido.
 - `hreflang` e `canonical` tra le tre lingue, `sitemap.xml` con le alternative, `robots.txt`, meta `robots` con anteprime grandi, Open Graph con immagine e testo alternativo per lingua.
 - Favicon in SVG e ICO (Google la mostra nei risultati), manifest, prestazioni alte (Lighthouse 97–100), CSS/JS con versione nell'URL per una cache lunga.
+- Foto dei lavori con nomi di file e testi alternativi descrittivi nelle tre lingue ("Cocina abierta con isla en Carcaixent"), tutte elencate nella sitemap per Google Immagini; le copertine sono anche nella proprietà `image` dei dati strutturati.
 
 **Da fare fuori dal sito (è quello che conta di più per la visibilità locale)**
 
@@ -125,7 +129,7 @@ Per rigenerare gli SVG: `pip install fonttools brotli`, poi `python3 tools/logo.
 2. **Recensioni Google** dei clienti reali: chiedere a ogni cliente soddisfatto di lasciarne una e rispondere sempre.
 3. **Google Search Console** (e Bing Webmaster Tools): verificare il dominio, inviare `sitemap.xml`, controllare indicizzazione e `hreflang`. Per la verifica via meta tag basta aggiungerlo in `src/index.html` e rigenerare.
 4. **Coerenza dei dati (NAP) nelle directory**: Páginas Amarillas, infoisinfo e simili devono avere lo stesso indirizzo e gli stessi telefoni del sito. Infoisinfo oggi la colloca a Llaurí. Se l'azienda ha profili social, aggiungerli a `sameAs` nel JSON-LD di `src/index.html`.
-5. **Contenuti**: quando ci saranno le foto, una pagina per ogni lavoro (es. "Rehabilitación de fachada en Alzira") con foto e descrizione è il contenuto che più aiuta a posizionarsi per servizio e località. Il sito è predisposto per aggiungerle.
+5. **Contenuti**: ora che ci sono le foto, il passo successivo è una pagina per ogni lavoro (es. "Reforma de cocina y baño en Carcaixent") con le foto e due righe su cosa si è fatto: è il contenuto che più aiuta a posizionarsi per servizio e località.
 6. **Orari e fascia di prezzo**: se l'azienda li fornisce, vanno aggiunti ai dati strutturati (`openingHoursSpecification`, `priceRange`).
 
 ## Modificare l'illustrazione dell'intestazione

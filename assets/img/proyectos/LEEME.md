@@ -1,27 +1,35 @@
 # Fotos de los proyectos
 
-Sube aquí las fotos de las obras (JPG, unos 1600–2000 px de ancho, máximo ~400 KB cada una).
+Las fotos de esta carpeta las genera `tools/fotos.py`: no hace falta ponerlas aquí a mano.
 
-Después, en **`src/index.html`** (la plantilla, no el `index.html` de la raíz), escribe sus rutas en el atributo `data-gallery` del proyecto correspondiente, separadas por comas. La primera será la portada. Las rutas empiezan en la raíz de la web y sirven para los tres idiomas:
+1. Pon los originales, tal como salen del móvil, en una carpeta por proyecto dentro de `fotos/`
+   (en la raíz del repositorio; esa carpeta no se sube a GitHub). El nombre de la carpeta es el
+   `data-project` de la ficha en `src/index.html`:
 
-```html
-<article class="project project--wide" data-reveal
-         data-gallery="assets/img/proyectos/fachada-alzira-1.jpg, assets/img/proyectos/fachada-alzira-2.jpg">
-```
+   | Proyecto | Carpeta |
+   |---|---|
+   | Cocina abierta con península – Valencia (El Cabanyal) | `fotos/cocina-cabanyal-valencia/` |
+   | Fachada con aplacado de piedra – Alzira | `fotos/fachada-alzira/` |
+   | Cocina, baño y buhardilla – Carcaixent | `fotos/cocina-bano-buhardilla-carcaixent/` |
+   | Proyecto de reforma integral (infografías 3D) – Carcaixent | `fotos/proyecto-3d-carcaixent/` |
+   | Cocina abierta con isla – Carcaixent | `fotos/cocina-isla-carcaixent/` |
+   | Cocina y baño – Carcaixent | `fotos/cocina-bano-carcaixent/` |
+   | Ascensor a cota 0 – Canals | `fotos/ascensor-canals/` |
 
-Y regenera las páginas:
+   Van en orden alfabético y la primera es la portada: para elegirla, llámala por ejemplo `01-portada.jpg`.
 
-```bash
-python3 tools/build.py
-```
+2. Ejecuta:
 
-Nombres sugeridos:
+   ```bash
+   pip install pillow            # solo la primera vez (y pillow-heif para fotos .heic de iPhone)
+   python3 tools/fotos.py
+   python3 tools/build.py
+   ```
 
-| Proyecto | Fotos |
-|---|---|
-| Rehabilitación de fachada – Alzira | `fachada-alzira-1.jpg`, `fachada-alzira-2.jpg`… |
-| Reforma parcial – Carcaixent | `reforma-parcial-carcaixent-1.jpg`… |
-| Reforma integral – Carcaixent | `reforma-integral-carcaixent-1.jpg`… |
-| Ascensor a cota 0 – Canals | `ascensor-canals-1.jpg`… |
+El script endereza las fotos, las pasa a sRGB, las reduce a 1600 px, **les quita todos los metadatos
+(también la ubicación GPS, que en casas de clientes es un dato sensible)**, las guarda aquí como
+`<proyecto>-1.jpg`, `-2.jpg`… (y la portada también a 800 px de ancho, `<proyecto>-1-800.jpg`, para
+los móviles) y rellena el `data-gallery` del proyecto en `src/index.html`. Después `tools/build.py`
+pone la portada en la página con su texto alternativo y añade todas las fotos al `sitemap.xml`.
 
-Mientras un proyecto no tenga fotos, la web muestra su dibujo técnico.
+Solo se actualizan los proyectos que tienen carpeta en `fotos/`: los demás se quedan como están.
