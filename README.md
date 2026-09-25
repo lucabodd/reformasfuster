@@ -63,13 +63,9 @@ python3 -m http.server 8080
 ## Cose da completare prima di andare online
 
 1. **Foto dei progetti.** Le quattro schede (Fachada Alzira, Reforma parcial Carcaixent, Reforma integral Carcaixent, Ascensor cota 0 Canals) per ora mostrano un disegno tecnico. Per metterci le foto vere:
-   - carica le immagini in `assets/img/proyectos/` (JPG, lato lungo circa 1600–2000 px, massimo circa 400 KB ciascuna);
-   - in `src/index.html` riempi l'attributo `data-gallery` della scheda, con i percorsi separati da virgole. I percorsi partono dalla radice del sito e valgono per tutte e tre le lingue. La prima foto fa da copertina:
-     ```html
-     <article class="project project--wide" data-reveal
-              data-gallery="assets/img/proyectos/fachada-alzira-1.jpg, assets/img/proyectos/fachada-alzira-2.jpg">
-     ```
-   - esegui `python3 tools/build.py`. Il sito mostra da solo la copertina, il pulsante "Ver fotos (N)" e la galleria a schermo intero.
+   - metti gli originali (così come escono dal telefono) in `fotos/<progetto>/`: `fotos/fachada-alzira/`, `fotos/reforma-parcial-carcaixent/`, `fotos/reforma-integral-carcaixent/`, `fotos/ascensor-canals/`. L'ordine è quello alfabetico dei file: per scegliere la copertina basta chiamarla `01-portada.jpg`;
+   - esegui `python3 tools/fotos.py && python3 tools/build.py` (serve `pip install pillow`, e `pillow-heif` per le foto `.heic` dell'iPhone).
+   Lo script raddrizza le foto, converte il colore in sRGB e le riduce a 1600 px, salvandole in `assets/img/proyectos/`. **Elimina tutti i metadati, compresa la posizione GPS**, che nelle foto di case di clienti è un dato sensibile. Poi compila da solo il `data-gallery` della scheda in `src/index.html`. La cartella `fotos/` non va nel repository. Il sito mostra da solo la copertina, il pulsante "Ver fotos (N)" e la galleria a schermo intero, in tutte e tre le lingue.
 2. **Rilettura delle traduzioni.** Il valenciano segue la norma AVL (*teua*, *estes*, *complisquen*…) e l'inglese usa l'ortografia britannica (molti residenti britannici nella Comunitat Valenciana). Conviene comunque che le faccia rileggere un madrelingua, soprattutto per il lessico del settore.
 3. **Logo.** Il nuovo logo (vedi sotto) è una proposta: se all'azienda piace, è pronto; se invece ha già un logo suo e vuole tenerlo, va sostituito nei file elencati nella sezione "Logo".
 4. **Testi.** Sono presi dal sito attuale e riorganizzati. È meglio che il titolare li rilegga, soprattutto la sezione "Cómo trabajamos", che mette in fila come processo cose che sul vecchio sito erano sparse.

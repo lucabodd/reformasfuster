@@ -409,13 +409,13 @@
 
         <!--
           FOTOS DE LOS PROYECTOS
-          Sube las fotos a assets/img/proyectos/ y escribe sus rutas en data-gallery, separadas por comas
-          (rutas desde la raíz de la web, sin "../"). La primera será la portada. Ejemplo:
-          data-gallery="assets/img/proyectos/fachada-alzira-1.jpg, assets/img/proyectos/fachada-alzira-2.jpg"
-          Mientras no haya fotos se muestra el dibujo técnico. Después: python3 tools/build.py
+          Lo más cómodo: poner los originales en fotos/<proyecto>/ y ejecutar python3 tools/fotos.py
+          (reduce, optimiza, quita la ubicación GPS y rellena data-gallery). A mano: rutas desde la raíz
+          de la web separadas por comas; la primera es la portada. Mientras no haya fotos se ve el dibujo.
+          Después, en ambos casos: python3 tools/build.py
         -->
         <div class="projects__grid">
-          <article class="project project--wide" data-reveal data-gallery="">
+          <article class="project project--wide" data-reveal data-project="fachada-alzira" data-gallery="">
             <div class="project__media">
               {{> drawing-fachada.svg }}
             </div>
@@ -427,7 +427,7 @@
             </div>
           </article>
 
-          <article class="project" data-reveal data-gallery="">
+          <article class="project" data-reveal data-project="reforma-parcial-carcaixent" data-gallery="">
             <div class="project__media">
               {{> drawing-parcial.svg }}
             </div>
@@ -439,7 +439,7 @@
             </div>
           </article>
 
-          <article class="project" data-reveal data-gallery="">
+          <article class="project" data-reveal data-project="reforma-integral-carcaixent" data-gallery="">
             <div class="project__media">
               {{> drawing-integral.svg }}
             </div>
@@ -451,7 +451,7 @@
             </div>
           </article>
 
-          <article class="project project--wide" data-reveal data-gallery="">
+          <article class="project project--wide" data-reveal data-project="ascensor-canals" data-gallery="">
             <div class="project__media">
               {{> drawing-ascensor.svg }}
             </div>

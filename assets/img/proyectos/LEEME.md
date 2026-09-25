@@ -1,27 +1,29 @@
 # Fotos de los proyectos
 
-Sube aquí las fotos de las obras (JPG, unos 1600–2000 px de ancho, máximo ~400 KB cada una).
+Las fotos de esta carpeta las genera `tools/fotos.py`: no hace falta ponerlas aquí a mano.
 
-Después, en **`src/index.html`** (la plantilla, no el `index.html` de la raíz), escribe sus rutas en el atributo `data-gallery` del proyecto correspondiente, separadas por comas. La primera será la portada. Las rutas empiezan en la raíz de la web y sirven para los tres idiomas:
+1. Pon los originales, tal como salen del móvil, en una carpeta por proyecto dentro de `fotos/`
+   (en la raíz del repositorio; esa carpeta no se sube a GitHub):
 
-```html
-<article class="project project--wide" data-reveal
-         data-gallery="assets/img/proyectos/fachada-alzira-1.jpg, assets/img/proyectos/fachada-alzira-2.jpg">
-```
+   | Proyecto | Carpeta |
+   |---|---|
+   | Rehabilitación de fachada – Alzira | `fotos/fachada-alzira/` |
+   | Reforma parcial – Carcaixent | `fotos/reforma-parcial-carcaixent/` |
+   | Reforma integral – Carcaixent | `fotos/reforma-integral-carcaixent/` |
+   | Ascensor a cota 0 – Canals | `fotos/ascensor-canals/` |
 
-Y regenera las páginas:
+   Van en orden alfabético: para elegir la portada, llámala por ejemplo `01-portada.jpg`.
 
-```bash
-python3 tools/build.py
-```
+2. Ejecuta:
 
-Nombres sugeridos:
+   ```bash
+   pip install pillow            # solo la primera vez (y pillow-heif para fotos .heic de iPhone)
+   python3 tools/fotos.py
+   python3 tools/build.py
+   ```
 
-| Proyecto | Fotos |
-|---|---|
-| Rehabilitación de fachada – Alzira | `fachada-alzira-1.jpg`, `fachada-alzira-2.jpg`… |
-| Reforma parcial – Carcaixent | `reforma-parcial-carcaixent-1.jpg`… |
-| Reforma integral – Carcaixent | `reforma-integral-carcaixent-1.jpg`… |
-| Ascensor a cota 0 – Canals | `ascensor-canals-1.jpg`… |
+El script endereza las fotos, las pasa a sRGB, las reduce a 1600 px, **les quita todos los metadatos
+(también la ubicación GPS, que en casas de clientes es un dato sensible)**, las guarda aquí como
+`<proyecto>-1.jpg`, `-2.jpg`… y rellena el `data-gallery` del proyecto en `src/index.html`.
 
 Mientras un proyecto no tenga fotos, la web muestra su dibujo técnico.

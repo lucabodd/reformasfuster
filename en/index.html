@@ -668,13 +668,13 @@
 
         <!--
           FOTOS DE LOS PROYECTOS
-          Sube las fotos a assets/img/proyectos/ y escribe sus rutas en data-gallery, separadas por comas
-          (rutas desde la raíz de la web, sin "../"). La primera será la portada. Ejemplo:
-          data-gallery="assets/img/proyectos/fachada-alzira-1.jpg, assets/img/proyectos/fachada-alzira-2.jpg"
-          Mientras no haya fotos se muestra el dibujo técnico. Después: python3 tools/build.py
+          Lo más cómodo: poner los originales en fotos/<proyecto>/ y ejecutar python3 tools/fotos.py
+          (reduce, optimiza, quita la ubicación GPS y rellena data-gallery). A mano: rutas desde la raíz
+          de la web separadas por comas; la primera es la portada. Mientras no haya fotos se ve el dibujo.
+          Después, en ambos casos: python3 tools/build.py
         -->
         <div class="projects__grid">
-          <article class="project project--wide" data-reveal data-gallery="">
+          <article class="project project--wide" data-reveal data-project="fachada-alzira" data-gallery="">
             <div class="project__media">
               <svg class="drawing" viewBox="0 0 480 340" aria-hidden="true">
                 <path class="d-faint" d="M24 292h432"/>
@@ -713,7 +713,7 @@
             </div>
           </article>
 
-          <article class="project" data-reveal data-gallery="">
+          <article class="project" data-reveal data-project="reforma-parcial-carcaixent" data-gallery="">
             <div class="project__media">
               <svg class="drawing" viewBox="0 0 480 340" aria-hidden="true">
                 <g class="d-dim">
@@ -747,7 +747,7 @@
             </div>
           </article>
 
-          <article class="project" data-reveal data-gallery="">
+          <article class="project" data-reveal data-project="reforma-integral-carcaixent" data-gallery="">
             <div class="project__media">
               <svg class="drawing" viewBox="0 0 480 340" aria-hidden="true">
                 <rect x="70" y="48" width="340" height="222" fill="url(#hatch)" opacity=".75"/>
@@ -782,7 +782,7 @@
             </div>
           </article>
 
-          <article class="project project--wide" data-reveal data-gallery="">
+          <article class="project project--wide" data-reveal data-project="ascensor-canals" data-gallery="">
             <div class="project__media">
               <svg class="drawing" viewBox="0 0 480 340" aria-hidden="true">
                 <path class="d-line" d="M20 286h440" stroke-width="2"/>
