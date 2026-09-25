@@ -4,21 +4,26 @@
 Uso:  pip install pillow               (solo la primera vez; pillow-heif para fotos .heic de iPhone)
       python3 tools/fotos.py && python3 tools/build.py
 
-Pon las fotos originales, tal como salen del móvil o de la cámara, en una carpeta por proyecto:
+Pon las fotos originales, tal como salen del móvil o de la cámara, en una carpeta por proyecto
+cuyo nombre sea el data-project de su ficha en src/index.html:
+    fotos/cocina-cabanyal-valencia/
     fotos/fachada-alzira/
-    fotos/reforma-parcial-carcaixent/
-    fotos/reforma-integral-carcaixent/
+    fotos/cocina-bano-buhardilla-carcaixent/
+    fotos/proyecto-3d-carcaixent/
+    fotos/cocina-isla-carcaixent/
+    fotos/cocina-bano-carcaixent/
     fotos/ascensor-canals/
-(los nombres son los data-project de src/index.html). El orden es el alfabético de los archivos,
-así que para elegir la portada basta con llamarla, por ejemplo, 01-portada.jpg.
+El orden es el alfabético de los archivos, así que para elegir la portada basta con llamarla,
+por ejemplo, 01-portada.jpg.
 
 Para cada foto el script:
   - la endereza según la orientación que guardó la cámara,
   - convierte el color a sRGB (las de iPhone vienen en Display P3),
   - la reduce a 1600 px en el lado largo y la guarda como JPEG optimizado,
   - ELIMINA todos los metadatos, incluida la ubicación GPS (son casas de clientes),
-y la guarda en assets/img/proyectos/<proyecto>-1.jpg, -2.jpg… Después escribe esas rutas
-en el data-gallery del proyecto en src/index.html.
+y la guarda en assets/img/proyectos/<proyecto>-1.jpg, -2.jpg… De la portada guarda además una
+versión de 800 px de ancho (<proyecto>-1-800.jpg) para los móviles. Después escribe las rutas en
+el data-gallery del proyecto en src/index.html; tools/build.py hace el resto.
 
 La carpeta fotos/ no se sube al repositorio (está en .gitignore): los originales pesan mucho.
 """
@@ -45,6 +50,7 @@ OUTPUT = ROOT / "assets" / "img" / "proyectos"
 TEMPLATE = ROOT / "src" / "index.html"
 
 MAX_SIDE = 1600
+COVER_WIDTH = 800  # versión pequeña de la portada (build.py la usa en el srcset si existe)
 QUALITY = 80
 EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff"} | ({".heic", ".heif"} if HEIC else set())
 SRGB = ImageCms.createProfile("sRGB")
@@ -54,7 +60,8 @@ def natural_key(path):
     return [int(part) if part.isdigit() else part.lower() for part in re.split(r"(\d+)", path.name)]
 
 
-def to_web(src, dest):
+def to_web(src, dest, width=None):
+    """Guarda src como JPEG para la web: como mucho MAX_SIDE px de lado, o width px de ancho."""
     with Image.open(src) as im:
         im = ImageOps.exif_transpose(im)
         icc = im.info.get("icc_profile")
@@ -69,7 +76,12 @@ def to_web(src, dest):
             except (ImageCms.PyCMSError, OSError):
                 pass  # perfil ilegible: se deja el color tal cual
         im = im.convert("RGB")
-        im.thumbnail((MAX_SIDE, MAX_SIDE), Image.LANCZOS)
+        if width:
+            if im.width <= width:
+                return None
+            im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+        else:
+            im.thumbnail((MAX_SIDE, MAX_SIDE), Image.LANCZOS)
         # sin exif= ni icc_profile=: el JPEG resultante no lleva metadatos (ni GPS, ni modelo de móvil…)
         im.save(dest, "JPEG", quality=QUALITY, optimize=True, progressive=True)
         return im.size
@@ -104,7 +116,7 @@ def main():
             continue
 
         for old in OUTPUT.glob(f"{slug}-*.jpg"):
-            if re.fullmatch(rf"{re.escape(slug)}-\d+\.jpg", old.name):
+            if re.fullmatch(rf"{re.escape(slug)}-\d+(-{COVER_WIDTH})?\.jpg", old.name):
                 old.unlink()
         paths = []
         for n, src in enumerate(originals, 1):
@@ -112,6 +124,9 @@ def main():
             w, h = to_web(src, dest)
             paths.append(dest.relative_to(ROOT).as_posix())
             print(f"  {slug}: {src.name} → {dest.name} ({w}×{h}, {dest.stat().st_size // 1024} KB)")
+        small = OUTPUT / f"{slug}-1-{COVER_WIDTH}.jpg"
+        if to_web(originals[0], small, width=COVER_WIDTH):
+            print(f"  {slug}: portada pequeña → {small.name} ({small.stat().st_size // 1024} KB)")
         html, ok = set_gallery(html, slug, paths)
         if not ok:
             sys.exit(f"No encuentro el data-gallery del proyecto {slug} en src/index.html")

@@ -267,13 +267,13 @@
     const caption = $('.lightbox__caption', dlg);
     const prev = $('.lightbox__nav--prev', dlg);
     const next = $('.lightbox__nav--next', dlg);
-    const state = { photos: [], label: '', index: 0 };
+    const state = { photos: [], label: '', altKey: 'photo_alt', index: 0 };
 
     const show = (i) => {
       const n = state.photos.length;
       state.index = (i + n) % n;
       img.src = state.photos[state.index];
-      img.alt = t('photo_alt', { label: state.label, n: state.index + 1, total: n });
+      img.alt = t(state.altKey, { label: state.label, n: state.index + 1, total: n });
       caption.textContent = `${state.label} · ${state.index + 1} / ${n}`;
       prev.hidden = next.hidden = n < 2;
     };
@@ -298,9 +298,10 @@
     });
 
     return {
-      open(photos, label, index = 0) {
+      open(photos, label, renders = false, index = 0) {
         state.photos = photos;
         state.label = label;
+        state.altKey = renders ? 'render_alt' : 'photo_alt';
         show(index);
         dlg.showModal();
       },
@@ -315,28 +316,33 @@
     const title = $('h3', card)?.textContent.trim() || '';
     const place = $('.project__loc', card)?.textContent.trim();
     const label = place ? t('in_place', { title, place }) : title;
+    const renders = card.dataset.kind === 'render'; // infografías 3D, no fotos de obra
     const media = $('.project__media', card);
 
-    const cover = new Image();
-    cover.className = 'project__cover';
-    cover.src = photos[0];
-    cover.alt = label;
-    cover.loading = 'lazy';
-    cover.decoding = 'async';
-    media.append(cover);
+    // tools/build.py ya pone la portada en el HTML; si falta (ficha editada a mano), se crea aquí
+    if (!$('.project__cover', media)) {
+      const cover = new Image();
+      cover.className = 'project__cover';
+      cover.src = photos[0];
+      cover.alt = label;
+      cover.loading = 'lazy';
+      cover.decoding = 'async';
+      media.append(cover);
+    }
     card.classList.add('has-photos');
 
+    const view = t(renders ? 'view_renders' : 'view_photos', { total: photos.length });
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'project__open';
     btn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-photo"/></svg>';
-    btn.append(` ${t('view_photos', { total: photos.length })}`);
-    btn.setAttribute('aria-label', `${t('view_photos', { total: photos.length })}: ${label}`);
+    btn.append(` ${view}`);
+    btn.setAttribute('aria-label', `${view}: ${label}`);
     $('.project__body', card).append(btn);
 
     const open = () => {
       lightbox = lightbox || buildLightbox();
-      lightbox.open(photos, label, 0);
+      lightbox.open(photos, label, renders);
     };
     btn.addEventListener('click', open);
     media.addEventListener('click', open);

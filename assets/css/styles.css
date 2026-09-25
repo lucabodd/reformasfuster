@@ -820,22 +820,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background-size: 22px 22px;
 }
 
-.project__cover,
-.drawing {
+.project__cover {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   transition: transform .7s var(--ease);
 }
-.project__cover { object-fit: cover; }
-.drawing { padding: 5%; }
-.project:hover .drawing { transform: scale(1.03); }
 .project:hover .project__cover { transform: scale(1.045); }
-.project.has-photos .drawing { display: none; }
 .project.has-photos .project__media { cursor: zoom-in; }
 
-.project__body { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: .75rem 1rem; padding: 1.25rem 1.4rem 1.4rem; }
+/* texto arriba y botón de la galería abajo, alineado entre las fichas de una misma fila */
+.project__body { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.25rem 1.4rem 1.4rem; }
 .project__text { min-width: 0; }
 .project__meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin: 0 0 .55rem; font-size: .88rem; color: var(--ink-soft); }
 .project__loc { display: inline-flex; align-items: center; gap: .3rem; }
@@ -852,33 +849,28 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background: transparent;
   font-size: .9rem;
   font-weight: 620;
+  margin-top: auto;
   cursor: pointer;
   transition: background-color .2s, color .2s, border-color .2s;
 }
 .project__open:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
 
+/* tablet: dos columnas, la primera ficha a todo el ancho */
+@media (min-width: 600px) and (max-width: 899.98px) {
+  .projects__grid { grid-template-columns: 1fr 1fr; }
+  .project:first-child { grid-column: 1 / -1; }
+  .project__media { aspect-ratio: auto; height: clamp(220px, 34vw, 280px); }
+  .project:first-child .project__media { height: clamp(280px, 46vw, 400px); }
+}
+
+/* escritorio: filas de 7 + 5, 5 + 7 y 4 + 4 + 4 columnas */
 @media (min-width: 900px) {
   .projects__grid { grid-template-columns: repeat(12, 1fr); }
   .project { grid-column: span 5; }
   .project--wide { grid-column: span 7; }
+  .project--third { grid-column: span 4; }
   .project__media { aspect-ratio: auto; height: clamp(300px, 27vw, 380px); }
 }
-
-/* dibujos técnicos de las fichas */
-.drawing { color: var(--accent-light); }
-.drawing .d-line { fill: none; stroke: rgba(245, 240, 232, .78); stroke-width: 1.3; }
-.drawing .d-faint { fill: none; stroke: rgba(245, 240, 232, .28); stroke-width: 1; }
-.drawing .d-wall { fill: none; stroke: rgba(245, 240, 232, .92); stroke-width: 6; stroke-linecap: square; }
-.drawing .d-wall-in { fill: none; stroke: rgba(245, 240, 232, .92); stroke-width: 3.5; }
-.drawing .d-dim { opacity: .38; }
-.drawing .d-accent { fill: none; stroke: var(--accent-light); stroke-width: 1.4; }
-.drawing .d-win rect { fill: var(--ink); stroke: rgba(245, 240, 232, .8); stroke-width: 1; }
-.drawing .d-slab rect { fill: rgba(245, 240, 232, .72); }
-.drawing .d-cota path { fill: none; stroke: currentColor; stroke-width: 1; }
-.drawing .d-cota .d-fill { fill: currentColor; stroke: none; }
-.drawing .d-cota text { fill: currentColor; font-size: 11px; font-weight: 620; letter-spacing: .06em; }
-.drawing .d-label { fill: rgba(245, 240, 232, .5); font-size: 10.5px; font-weight: 620; letter-spacing: .16em; }
-.drawing .d-accent-text { fill: var(--accent-light); }
 
 /* ---------------------------------------------------------------- preguntas frecuentes */
 

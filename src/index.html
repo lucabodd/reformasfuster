@@ -52,7 +52,7 @@
         "slogan": {{ hero.title | json }},
         "url": "https://www.f2fconstruccionesyreformas.com/",
         "logo": { "@type": "ImageObject", "url": "https://www.f2fconstruccionesyreformas.com/assets/img/icon-512.png", "width": 512, "height": 512 },
-        "image": "{{ page.og_image }}",
+        "image": {{ page.images }},
         "email": "construccionesf2f@gmail.com",
         "telephone": "+34 620 218 734",
         "contactPoint": [
@@ -72,6 +72,7 @@
           { "@type": "City", "name": "Alzira" },
           { "@type": "City", "name": "Carcaixent" },
           { "@type": "City", "name": "Canals" },
+          { "@type": "City", "name": "Valencia" },
           { "@type": "AdministrativeArea", "name": "Ribera Alta" },
           { "@type": "AdministrativeArea", "name": "Provincia de Valencia" }
         ],
@@ -409,56 +410,79 @@
 
         <!--
           FOTOS DE LOS PROYECTOS
-          Lo más cómodo: poner los originales en fotos/<proyecto>/ y ejecutar python3 tools/fotos.py
-          (reduce, optimiza, quita la ubicación GPS y rellena data-gallery). A mano: rutas desde la raíz
-          de la web separadas por comas; la primera es la portada. Mientras no haya fotos se ve el dibujo.
-          Después, en ambos casos: python3 tools/build.py
+          data-gallery: rutas de las fotos desde la raíz de la web, separadas por comas; la primera es la portada.
+          Lo rellena tools/fotos.py a partir de fotos/<data-project>/ (reduce, optimiza y quita la ubicación GPS).
+          tools/build.py pone la portada dentro de .project__media (con su texto alternativo, tamaño y versión
+          pequeña) y añade todas las fotos al sitemap. data-kind="render": son infografías 3D, no fotos de obra.
+          Después de cambiar algo: python3 tools/build.py
         -->
         <div class="projects__grid">
-          <article class="project project--wide" data-reveal data-project="fachada-alzira" data-gallery="">
-            <div class="project__media">
-              {{> drawing-fachada.svg }}
+          <article class="project project--wide" data-reveal data-project="cocina-cabanyal-valencia" data-gallery="assets/img/proyectos/cocina-cabanyal-valencia-1.jpg, assets/img/proyectos/cocina-cabanyal-valencia-2.jpg">
+            <div class="project__media"></div>
+            <div class="project__body">
+              <div class="project__text">
+                <p class="project__meta"><span class="tag">{{ proyectos.tag_parcial }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>{{ proyectos.place_cabanyal }}</span></p>
+                <h3>{{ proyectos.cabanyal_title }}</h3>
+              </div>
             </div>
+          </article>
+
+          <article class="project" data-reveal data-project="fachada-alzira" data-gallery="assets/img/proyectos/fachada-alzira-1.jpg, assets/img/proyectos/fachada-alzira-2.jpg, assets/img/proyectos/fachada-alzira-3.jpg">
+            <div class="project__media"></div>
             <div class="project__body">
               <div class="project__text">
                 <p class="project__meta"><span class="tag">{{ proyectos.tag_rehab }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Alzira</span></p>
-                <h3>{{ proyectos.p1_title }}</h3>
+                <h3>{{ proyectos.fachada_title }}</h3>
               </div>
             </div>
           </article>
 
-          <article class="project" data-reveal data-project="reforma-parcial-carcaixent" data-gallery="">
-            <div class="project__media">
-              {{> drawing-parcial.svg }}
-            </div>
+          <article class="project" data-reveal data-project="cocina-bano-buhardilla-carcaixent" data-gallery="assets/img/proyectos/cocina-bano-buhardilla-carcaixent-1.jpg, assets/img/proyectos/cocina-bano-buhardilla-carcaixent-2.jpg, assets/img/proyectos/cocina-bano-buhardilla-carcaixent-3.jpg, assets/img/proyectos/cocina-bano-buhardilla-carcaixent-4.jpg, assets/img/proyectos/cocina-bano-buhardilla-carcaixent-5.jpg">
+            <div class="project__media"></div>
             <div class="project__body">
               <div class="project__text">
-                <p class="project__meta"><span class="tag">{{ proyectos.tag_reforma }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Carcaixent</span></p>
-                <h3>{{ proyectos.p2_title }}</h3>
+                <p class="project__meta"><span class="tag">{{ proyectos.tag_parcial }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Carcaixent</span></p>
+                <h3>{{ proyectos.buhardilla_title }}</h3>
               </div>
             </div>
           </article>
 
-          <article class="project" data-reveal data-project="reforma-integral-carcaixent" data-gallery="">
-            <div class="project__media">
-              {{> drawing-integral.svg }}
-            </div>
+          <article class="project project--wide" data-reveal data-project="proyecto-3d-carcaixent" data-kind="render" data-gallery="assets/img/proyectos/proyecto-3d-carcaixent-1.jpg, assets/img/proyectos/proyecto-3d-carcaixent-2.jpg, assets/img/proyectos/proyecto-3d-carcaixent-3.jpg">
+            <div class="project__media"></div>
             <div class="project__body">
               <div class="project__text">
-                <p class="project__meta"><span class="tag">{{ proyectos.tag_reforma }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Carcaixent</span></p>
-                <h3>{{ proyectos.p3_title }}</h3>
+                <p class="project__meta"><span class="tag">{{ proyectos.tag_3d }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Carcaixent</span></p>
+                <h3>{{ proyectos.integral_title }}</h3>
               </div>
             </div>
           </article>
 
-          <article class="project project--wide" data-reveal data-project="ascensor-canals" data-gallery="">
-            <div class="project__media">
-              {{> drawing-ascensor.svg }}
+          <article class="project project--third" data-reveal data-project="cocina-isla-carcaixent" data-gallery="assets/img/proyectos/cocina-isla-carcaixent-1.jpg, assets/img/proyectos/cocina-isla-carcaixent-2.jpg">
+            <div class="project__media"></div>
+            <div class="project__body">
+              <div class="project__text">
+                <p class="project__meta"><span class="tag">{{ proyectos.tag_parcial }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Carcaixent</span></p>
+                <h3>{{ proyectos.isla_title }}</h3>
+              </div>
             </div>
+          </article>
+
+          <article class="project project--third" data-reveal data-project="cocina-bano-carcaixent" data-gallery="assets/img/proyectos/cocina-bano-carcaixent-1.jpg, assets/img/proyectos/cocina-bano-carcaixent-2.jpg, assets/img/proyectos/cocina-bano-carcaixent-3.jpg">
+            <div class="project__media"></div>
+            <div class="project__body">
+              <div class="project__text">
+                <p class="project__meta"><span class="tag">{{ proyectos.tag_parcial }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Carcaixent</span></p>
+                <h3>{{ proyectos.cocina_bano_title }}</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="project project--third" data-reveal data-project="ascensor-canals" data-gallery="assets/img/proyectos/ascensor-canals-1.jpg, assets/img/proyectos/ascensor-canals-2.jpg, assets/img/proyectos/ascensor-canals-3.jpg, assets/img/proyectos/ascensor-canals-4.jpg, assets/img/proyectos/ascensor-canals-5.jpg">
+            <div class="project__media"></div>
             <div class="project__body">
               <div class="project__text">
                 <p class="project__meta"><span class="tag">{{ proyectos.tag_access }}</span><span class="project__loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Canals</span></p>
-                <h3>{{ proyectos.p4_title }}</h3>
+                <h3>{{ proyectos.ascensor_title }}</h3>
               </div>
             </div>
           </article>
